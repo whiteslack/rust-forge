@@ -2337,35 +2337,29 @@ they are not currently an active part of the decision-making process.
 Unfortunately, whenever a new person is added or someone goes into alumni
 status, there are a number of disparate places that need to be updated. This
 page aims to document that list. If you have any questions, or need someone with
-more privileges to make a change for you, a good place to ask is #rust-infra (or
-possibly #rust-internals).</p>
-<h3><a class="header" href="#r-rights" id="r-rights">R+ rights</a></h3>
-<p>If just giving r+ rights, the following places need to be modified:</p>
+more privileges to make a change for you, a good place to ask is <code>#infra</code> on
+Discord.</p>
+<h3><a class="header" href="#team-repo" id="team-repo">Team repo</a></h3>
+<p>Membership of teams is primarily driven by the config files in the
+<a href="https://github.com/rust-lang/team/tree/master/teams">rust-lang/team repo</a>. Several systems use the team repo data to
+control access:</p>
 <ul>
-<li>the <a href="https://github.com/alexcrichton/rust-central-station/blob/master/homu.toml.template">homu template on rust-central-station</a></li>
+<li>the <a href="https://www.rust-lang.org/governance">team website</a></li>
+<li>bors r+ rights</li>
+<li>rfcbot interaction</li>
+<li>Mailgun email lists</li>
 </ul>
+<p>Team membership is duplicated in a few other places listed below, but the
+long-term goal is to centralize on the team repo.</p>
 <h3><a class="header" href="#full-team-membership" id="full-team-membership">Full team membership</a></h3>
 <p>To make a full team member, the following places need to be modified:</p>
 <ul>
-<li>the <a href="https://github.com/rust-lang/rust-www/blob/master/_data/team.yml">team roster page</a></li>
+<li>the <a href="https://github.com/rust-lang/team/tree/master/teams">team repo</a></li>
 <li>the <a href="https://github.com/orgs/rust-lang/teams">rust-lang/TEAM</a> and (in some cases)
 <a href="https://github.com/orgs/rust-lang-nursery/teams">rust-lang-nursery/TEAM</a> teams on github must be updated</li>
-<li>rfcbot has a separate list of people on a team that is maintained in a
-configuration file
-<ul>
-<li><a href="https://github.com/anp/rfcbot-rs/commit/cd54241359cf65742ed5a0fba58ea5114de06f2b#diff-100115fcbdda685c37ba8f73727b0987">here is an example commit that was adding Centril to the lang
-team</a></li>
-</ul>
-</li>
-<li>the easydns service has an e-mail alias (<code>compiler-team@rust-lang.org</code>) that
-needs to be updated
-<ul>
-<li>best here is to ask around in #rust-infra</li>
-</ul>
-</li>
 <li>the
 <a href="https://internals.rust-lang.org/admin/groups/custom">internals discussion board has per-team groups</a></li>
-<li>the list of reviewers highfive uses is set in <a href="https://github.com/nrc/highfive/tree/master/highfive/configs">nrc/highfive</a>
+<li>the list of reviewers highfive uses is set in <a href="https://github.com/rust-lang/highfive/tree/master/highfive/configs">rust-lang/highfive</a>
 <ul>
 <li>the configs are set per-repo; some teams are listed in <code>rust.json</code>, whereas
 those that span multiple repos are set in <code>_global.json</code></li>
@@ -2375,13 +2369,11 @@ those that span multiple repos are set in <code>_global.json</code></li>
 <h3><a class="header" href="#team-member-departure" id="team-member-departure">Team member departure</a></h3>
 <p>Remove the team member from any and all places:</p>
 <ul>
-<li><a href="https://github.com/nrc/highfive/tree/master/highfive/configs">highfive</a></li>
-<li><a href="https://github.com/alexcrichton/rust-central-station/blob/master/homu.toml.template">reviewers list</a></li>
-<li>rfcbot (<a href="https://github.com/anp/rfcbot-rs/commit/cd54241359cf65742ed5a0fba58ea5114de06f2b#diff-100115fcbdda685c37ba8f73727b0987">example</a>)</li>
+<li><a href="https://github.com/rust-lang/highfive/tree/master/highfive/configs">highfive</a></li>
 <li>1password</li>
 <li>The <a href="https://github.com/orgs/rust-lang/teams">GitHub team</a>, <a href="https://github.com/orgs/rust-lang-nursery/teams">GitHub nursery team</a></li>
-<li>email aliases (as above)</li>
-<li><a href="https://github.com/rust-lang/rust-www/blob/master/_data/team.yml">team roster page</a></li>
+<li><a href="https://github.com/rust-lang/team/tree/master/teams">team repo</a></li>
+<li><a href="https://github.com/rust-lang/rust/blob/master/src/tools/publish_toolstate.py">toolstate notifications</a></li>
 </ul>
 <h1><a class="header" href="#handling-of-tools-embedded-in-the-rustc-repo-toolstate" id="handling-of-tools-embedded-in-the-rustc-repo-toolstate">Handling of tools embedded in the rustc repo (&quot;toolstate&quot;)</a></h1>
 <p>The Rust repository contains several external tools and documents as git
