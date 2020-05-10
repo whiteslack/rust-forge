@@ -4253,17 +4253,26 @@ they will not be merged by themselves until everything in front of them in the
 queue has been merged.</p>
 <h2><a class="header" href="#making-a-rollup" id="making-a-rollup">Making a Rollup</a></h2>
 <ol>
-<li>Using the interface on <a href="https://buildbot2.rust-lang.org/homu/queue/rust">Homu queue</a>, select a few pull requests and then use
-&quot;rollup&quot; button to make one. (The text about fairness can be ignored.)</li>
-<li>Use the <code>@bors r+ rollup=never p=&lt;NUMBER_OF_PRS_IN_ROLLUP&gt;</code> command in the
-pull request thread.</li>
-<li>Mark the pull request with the label <code>rollup</code>.</li>
-<li>If the rollup fails, use the logs rust-highfive (really it is
+<li>
+<p>Using the interface on <a href="https://buildbot2.rust-lang.org/homu/queue/rust">Homu queue</a>, select a few pull requests and then use
+&quot;rollup&quot; button to make one. (The text about fairness can be ignored.)</p>
+</li>
+<li>
+<p>Run the following command in the pull request thread:</p>
+<pre><code>@rustbot modify labels: +rollup
+@bors r+ rollup=never p=&lt;NUMBER_OF_PRS_IN_ROLLUP&gt;
+</code></pre>
+</li>
+<li>
+<p>If the rollup fails, use the logs rust-highfive (really it is
 rust-log-analyzer) provides to bisect the failure to a specific PR and do
 <code>@bors r-</code>. If the PR is running, you need to do <code>@bors r- retry</code>. Otherwise,
 your rollup succeeded. If it did, proceed to the next rollup (every now and
-then let <code>rollup=never</code> and toolstate PRs progress).</li>
-<li>Recreate the rollup without the offending PR starting again from <strong>1.</strong></li>
+then let <code>rollup=never</code> and toolstate PRs progress).</p>
+</li>
+<li>
+<p>Recreate the rollup without the offending PR starting again from <strong>1.</strong></p>
+</li>
 </ol>
 <h2><a class="header" href="#selecting-pull-requests" id="selecting-pull-requests">Selecting Pull Requests</a></h2>
 <p>This is something you will learn to improve over time. Some basic tips include
