@@ -3887,6 +3887,8 @@ compiled, but for others <code>rustc</code> and <code>cargo</code> are too.</li>
 <tr><td><code>aarch64-pc-windows-msvc</code></td><td>✓</td><td></td><td></td><td>ARM64 Windows MSVC</td></tr>
 <tr><td><code>aarch64-unknown-linux-gnu</code></td><td>✓</td><td>✓</td><td>✓</td><td>ARM64 Linux</td></tr>
 <tr><td><code>aarch64-unknown-linux-musl</code></td><td>✓</td><td></td><td></td><td>ARM64 Linux with MUSL</td></tr>
+<tr><td><code>aarch64-unknown-none</code></td><td>*</td><td></td><td></td><td>Bare ARM64, hardfloat</td></tr>
+<tr><td><code>aarch64-unknown-none-softfloat</code></td><td>*</td><td></td><td></td><td>Bare ARM64, softfloat</td></tr>
 <tr><td><code>arm-linux-androideabi</code></td><td>✓</td><td></td><td></td><td>ARMv7 Android</td></tr>
 <tr><td><code>arm-unknown-linux-gnueabi</code></td><td>✓</td><td>✓</td><td>✓</td><td>ARMv6 Linux</td></tr>
 <tr><td><code>arm-unknown-linux-gnueabihf</code></td><td>✓</td><td>✓</td><td>✓</td><td>ARMv6 Linux, hardfloat</td></tr>
@@ -3900,7 +3902,9 @@ compiled, but for others <code>rustc</code> and <code>cargo</code> are too.</li>
 <tr><td><code>armv7a-none-eabi</code></td><td>*</td><td></td><td></td><td>Bare ARMv7-A</td></tr>
 <tr><td><code>armv7r-none-eabi</code></td><td>*</td><td></td><td></td><td>Bare ARMv7-R</td></tr>
 <tr><td><code>armv7r-none-eabihf</code></td><td>*</td><td></td><td></td><td>Bare ARMv7-R, hardfloat</td></tr>
-<tr><td><code>armv7-unknown-linux-gnueabihf</code></td><td>✓</td><td>✓</td><td>✓</td><td>ARMv7 Linux</td></tr>
+<tr><td><code>armv7-unknown-linux-gnueabi</code></td><td>✓</td><td></td><td></td><td>ARMv7 Linux, glibc</td></tr>
+<tr><td><code>armv7-unknown-linux-gnueabihf</code></td><td>✓</td><td>✓</td><td>✓</td><td>ARMv7 Linux, hardfloat</td></tr>
+<tr><td><code>armv7-unknown-linux-musleabi</code></td><td>✓</td><td></td><td></td><td>ARMv7 Linux, MUSL</td></tr>
 <tr><td><code>armv7-unknown-linux-musleabihf</code></td><td>✓</td><td></td><td></td><td>ARMv7 Linux with MUSL</td></tr>
 <tr><td><code>asmjs-unknown-emscripten</code></td><td>✓</td><td></td><td></td><td>asm.js via Emscripten</td></tr>
 <tr><td><code>i586-pc-windows-msvc</code></td><td>✓</td><td></td><td></td><td>32-bit Windows w/o SSE</td></tr>
@@ -3912,14 +3916,19 @@ compiled, but for others <code>rustc</code> and <code>cargo</code> are too.</li>
 <tr><td><code>mips-unknown-linux-gnu</code></td><td>✓</td><td>✓</td><td>✓</td><td>MIPS Linux</td></tr>
 <tr><td><code>mips-unknown-linux-musl</code></td><td>✓</td><td></td><td></td><td>MIPS Linux with MUSL</td></tr>
 <tr><td><code>mips64-unknown-linux-gnuabi64</code></td><td>✓</td><td>✓</td><td>✓</td><td>MIPS64 Linux, n64 ABI</td></tr>
+<tr><td><code>mips64-unknown-linux-muslabi64</code></td><td>✓</td><td></td><td></td><td>MIPS64 Linux, n64 ABI, MUSL</td></tr>
 <tr><td><code>mips64el-unknown-linux-gnuabi64</code></td><td>✓</td><td>✓</td><td>✓</td><td>MIPS64 (LE) Linux, n64 ABI</td></tr>
+<tr><td><code>mips64el-unknown-linux-muslabi64</code></td><td>✓</td><td></td><td></td><td>MIPS64 (LE) Linux, n64 ABI, MUSL</td></tr>
 <tr><td><code>mipsel-unknown-linux-gnu</code></td><td>✓</td><td>✓</td><td>✓</td><td>MIPS (LE) Linux</td></tr>
 <tr><td><code>mipsel-unknown-linux-musl</code></td><td>✓</td><td></td><td></td><td>MIPS (LE) Linux with MUSL</td></tr>
+<tr><td><code>nvptx64-nvidia-cuda</code></td><td>✓</td><td></td><td></td><td>--emit=asm generates PTX code that <a href="https://github.com/japaric-archived/nvptx#targets">runs on NVIDIA GPUs</a></td></tr>
 <tr><td><code>powerpc-unknown-linux-gnu</code></td><td>✓</td><td>✓</td><td>✓</td><td>PowerPC Linux</td></tr>
 <tr><td><code>powerpc64-unknown-linux-gnu</code></td><td>✓</td><td>✓</td><td>✓</td><td>PPC64 Linux</td></tr>
 <tr><td><code>powerpc64le-unknown-linux-gnu</code></td><td>✓</td><td>✓</td><td>✓</td><td>PPC64LE Linux</td></tr>
+<tr><td><code>riscv32i-unknown-none-elf</code></td><td>*</td><td></td><td></td><td>Bare RISC-V (RV32I ISA)</td></tr>
 <tr><td><code>riscv32imac-unknown-none-elf</code></td><td>*</td><td></td><td></td><td>Bare RISC-V (RV32IMAC ISA)</td></tr>
 <tr><td><code>riscv32imc-unknown-none-elf</code></td><td>*</td><td></td><td></td><td>Bare RISC-V (RV32IMC ISA)</td></tr>
+<tr><td><code>riscv64gc-unknown-linux-gnu</code></td><td>✓</td><td>✓</td><td>✓</td><td>RISC-V Linux</td></tr>
 <tr><td><code>riscv64gc-unknown-none-elf</code></td><td>*</td><td></td><td></td><td>Bare RISC-V (RV64IMAFDC ISA)</td></tr>
 <tr><td><code>riscv64imac-unknown-none-elf</code></td><td>*</td><td></td><td></td><td>Bare RISC-V (RV64IMAC ISA)</td></tr>
 <tr><td><code>s390x-unknown-linux-gnu</code></td><td>✓</td><td>✓</td><td>✓</td><td>S390x Linux</td></tr>
@@ -3931,6 +3940,9 @@ compiled, but for others <code>rustc</code> and <code>cargo</code> are too.</li>
 <tr><td><code>thumbv7m-none-eabi</code></td><td>*</td><td></td><td></td><td>Bare Cortex-M3</td></tr>
 <tr><td><code>thumbv7neon-linux-androideabi</code></td><td>✓</td><td></td><td></td><td>Thumb2-mode ARMv7a Android with NEON</td></tr>
 <tr><td><code>thumbv7neon-unknown-linux-gnueabihf</code></td><td>✓</td><td></td><td></td><td>Thumb2-mode ARMv7a Linux with NEON</td></tr>
+<tr><td><code>thumbv8m.base-none-eabi</code></td><td>*</td><td></td><td></td><td>ARMv8-M Baseline</td></tr>
+<tr><td><code>thumbv8m.main-none-eabi</code></td><td>*</td><td></td><td></td><td>ARMv8-M Mainline</td></tr>
+<tr><td><code>thumbv8m.main-none-eabihf</code></td><td>*</td><td></td><td></td><td>ARMv8-M Baseline, hardfloat</td></tr>
 <tr><td><code>wasm32-unknown-emscripten</code></td><td>✓</td><td></td><td></td><td>WebAssembly via Emscripten</td></tr>
 <tr><td><code>wasm32-unknown-unknown</code></td><td>✓</td><td></td><td></td><td>WebAssembly</td></tr>
 <tr><td><code>wasm32-wasi</code></td><td>✓</td><td></td><td></td><td>WebAssembly with WASI</td></tr>
@@ -3972,10 +3984,10 @@ compiled, but for others <code>rustc</code> and <code>cargo</code> are too.</li>
 are not built or tested automatically, and may not work. Official builds are
 not available.</p>
 <table><thead><tr><th>target</th><th>std</th><th>rustc</th><th>cargo</th><th>notes</th></tr></thead><tbody>
+<tr><td><code>aarch64-apple-tvos</code></td><td>**</td><td></td><td></td><td>ARM64 tvOS</td></tr>
 <tr><td><code>aarch64-unknown-freebsd</code></td><td>✓</td><td>✓</td><td>✓</td><td>ARM64 FreeBSD</td></tr>
 <tr><td><code>aarch64-unknown-hermit</code></td><td>?</td><td></td><td></td><td></td></tr>
 <tr><td><code>aarch64-unknown-netbsd</code></td><td>?</td><td></td><td></td><td></td></tr>
-<tr><td><code>aarch64-unknown-none</code></td><td>?</td><td></td><td></td><td></td></tr>
 <tr><td><code>aarch64-unknown-openbsd</code></td><td>✓</td><td>✓</td><td>✓</td><td>ARM64 OpenBSD</td></tr>
 <tr><td><code>aarch64-unknown-redox</code></td><td>?</td><td></td><td></td><td></td></tr>
 <tr><td><code>aarch64-uwp-windows-msvc</code></td><td>?</td><td></td><td></td><td></td></tr>
@@ -3987,11 +3999,13 @@ not available.</p>
 <tr><td><code>armv7-unknown-freebsd</code></td><td>✓</td><td>✓</td><td>✓</td><td>ARMv7 FreeBSD</td></tr>
 <tr><td><code>armv7-unknown-netbsd-eabihf</code></td><td>?</td><td></td><td></td><td></td></tr>
 <tr><td><code>armv7-wrs-vxworks-eabihf</code></td><td>?</td><td></td><td></td><td></td></tr>
+<tr><td><code>armv7a-none-eabihf</code></td><td>*</td><td></td><td></td><td>ARM Cortex-A, hardfloat</td></tr>
 <tr><td><code>armv7s-apple-ios</code></td><td>✓</td><td></td><td></td><td></td></tr>
 <tr><td><code>hexagon-unknown-linux-musl</code></td><td>?</td><td></td><td></td><td></td></tr>
 <tr><td><code>i386-apple-ios</code></td><td>✓</td><td></td><td></td><td>32-bit x86 iOS</td></tr>
 <tr><td><code>i686-apple-darwin</code></td><td>✓</td><td>✓</td><td>✓</td><td>32-bit OSX (10.7+, Lion+)</td></tr>
 <tr><td><code>i686-pc-windows-msvc</code></td><td>✓</td><td></td><td></td><td>32-bit Windows XP support</td></tr>
+<tr><td><code>i686-unknown-uefi</code></td><td>?</td><td></td><td></td><td>32-bit UEFI</td></tr>
 <tr><td><code>i686-unknown-haiku</code></td><td>✓</td><td>✓</td><td>✓</td><td>32-bit Haiku</td></tr>
 <tr><td><code>i686-unknown-netbsd</code></td><td>✓</td><td></td><td></td><td>NetBSD/i386 with SSE2</td></tr>
 <tr><td><code>i686-unknown-openbsd</code></td><td>✓</td><td>✓</td><td>✓</td><td>32-bit OpenBSD</td></tr>
@@ -3999,15 +4013,12 @@ not available.</p>
 <tr><td><code>i686-uwp-windows-msvc</code></td><td>?</td><td></td><td></td><td></td></tr>
 <tr><td><code>i686-wrs-vxworks</code></td><td>?</td><td></td><td></td><td></td></tr>
 <tr><td><code>mips-unknown-linux-uclibc</code></td><td>✓</td><td></td><td></td><td>MIPS Linux with uClibc</td></tr>
-<tr><td><code>mips64-unknown-linux-muslabi64</code></td><td>?</td><td></td><td></td><td></td></tr>
-<tr><td><code>mips64el-unknown-linux-muslabi64</code></td><td>?</td><td></td><td></td><td></td></tr>
 <tr><td><code>mipsel-unknown-linux-uclibc</code></td><td>✓</td><td></td><td></td><td>MIPS (LE) Linux with uClibc</td></tr>
 <tr><td><code>mipsisa32r6-unknown-linux-gnu</code></td><td>?</td><td></td><td></td><td></td></tr>
 <tr><td><code>mipsisa32r6el-unknown-linux-gnu</code></td><td>?</td><td></td><td></td><td></td></tr>
 <tr><td><code>mipsisa64r6-unknown-linux-gnuabi64</code></td><td>?</td><td></td><td></td><td></td></tr>
 <tr><td><code>mipsisa64r6el-unknown-linux-gnuabi64</code></td><td>?</td><td></td><td></td><td></td></tr>
 <tr><td><code>msp430-none-elf</code></td><td>*</td><td></td><td></td><td>16-bit MSP430 microcontrollers</td></tr>
-<tr><td><code>nvptx64-nvidia-cuda</code></td><td>**</td><td></td><td></td><td>--emit=asm generates PTX code that <a href="https://github.com/japaric-archived/nvptx#targets">runs on NVIDIA GPUs</a></td></tr>
 <tr><td><code>powerpc-unknown-linux-musl</code></td><td>?</td><td></td><td></td><td></td></tr>
 <tr><td><code>powerpc-unknown-netbsd</code></td><td>?</td><td></td><td></td><td></td></tr>
 <tr><td><code>powerpc-wrs-vxworks</code></td><td>?</td><td></td><td></td><td></td></tr>
@@ -4016,21 +4027,20 @@ not available.</p>
 <tr><td><code>powerpc64-unknown-linux-musl</code></td><td>?</td><td></td><td></td><td></td></tr>
 <tr><td><code>powerpc64-wrs-vxworks</code></td><td>?</td><td></td><td></td><td></td></tr>
 <tr><td><code>powerpc64le-unknown-linux-musl</code></td><td>?</td><td></td><td></td><td></td></tr>
-<tr><td><code>riscv32i-unknown-none-elf</code></td><td>?</td><td></td><td></td><td></td></tr>
-<tr><td><code>riscv64gc-unknown-linux-gnu</code></td><td>✓</td><td>✓</td><td>✓</td><td></td></tr>
 <tr><td><code>sparc64-unknown-netbsd</code></td><td>✓</td><td>✓</td><td></td><td>NetBSD/sparc64</td></tr>
 <tr><td><code>sparc64-unknown-openbsd</code></td><td>?</td><td></td><td></td><td></td></tr>
 <tr><td><code>thumbv7a-pc-windows-msvc</code></td><td>?</td><td></td><td></td><td></td></tr>
-<tr><td><code>thumbv8m.base-none-eabi</code></td><td>?</td><td></td><td></td><td></td></tr>
-<tr><td><code>thumbv8m.main-none-eabi</code></td><td>?</td><td></td><td></td><td></td></tr>
-<tr><td><code>thumbv8m.main-none-eabihf</code></td><td>?</td><td></td><td></td><td></td></tr>
-<tr><td><code>wasm32-experimental-emscripten</code></td><td>?</td><td></td><td></td><td></td></tr>
+<tr><td><code>thumbv7neon-unknown-linux-musleabihf</code></td><td>?</td><td></td><td></td><td>Thumb2-mode ARMv7a Linux with NEON, MUSL</td></tr>
+<tr><td><code>x86_64-apple-ios-macabi</code></td><td>✓</td><td></td><td></td><td>Apple Catalyst</td></tr>
+<tr><td><code>x86_64-apple-tvos</code></td><td>**</td><td></td><td></td><td>x86 64-bit tvOS</td></tr>
+<tr><td><code>x86_64-linux-kernel</code></td><td>?</td><td></td><td></td><td>Linux kernel modules</td></tr>
 <tr><td><code>x86_64-pc-solaris</code></td><td>?</td><td></td><td></td><td></td></tr>
 <tr><td><code>x86_64-pc-windows-msvc</code></td><td>✓</td><td></td><td></td><td>64-bit Windows XP support</td></tr>
-<tr><td><code>x86_64-unknown-bitrig</code></td><td>✓</td><td>✓</td><td></td><td>64-bit Bitrig</td></tr>
 <tr><td><code>x86_64-unknown-dragonfly</code></td><td>✓</td><td>✓</td><td>✓</td><td>64-bit DragonFlyBSD</td></tr>
 <tr><td><code>x86_64-unknown-haiku</code></td><td>✓</td><td>✓</td><td>✓</td><td>64-bit Haiku</td></tr>
 <tr><td><code>x86_64-unknown-hermit</code></td><td>?</td><td></td><td></td><td></td></tr>
+<tr><td><code>x86_64-unknown-hermit-kernel</code></td><td>?</td><td></td><td></td><td>HermitCore kernel</td></tr>
+<tr><td><code>x86_64-unknown-illumos</code></td><td>✓</td><td></td><td></td><td>illumos</td></tr>
 <tr><td><code>x86_64-unknown-l4re-uclibc</code></td><td>?</td><td></td><td></td><td></td></tr>
 <tr><td><code>x86_64-unknown-openbsd</code></td><td>✓</td><td>✓</td><td>✓</td><td>64-bit OpenBSD</td></tr>
 <tr><td><code>x86_64-unknown-uefi</code></td><td>?</td><td></td><td></td><td></td></tr>
@@ -4038,11 +4048,8 @@ not available.</p>
 <tr><td><code>x86_64-uwp-windows-msvc</code></td><td>✓</td><td></td><td></td><td></td></tr>
 <tr><td><code>x86_64-wrs-vxworks</code></td><td>?</td><td></td><td></td><td></td></tr>
 </tbody></table>
-<p>* These are bare-metal microcontroller targets that only have access to the
-core library, not std.</p>
-<p>** There’s backend support for these targets but no target built into rustc
-(yet). You’ll have to write your own target specification file (see the
-links in the table). These targets only support the core library.</p>
+<p>* These targets only support <code>core</code>, not <code>alloc</code> or <code>std</code>.</p>
+<p>** These targets only support <code>core</code> or <code>alloc</code>, not <code>std</code>.</p>
 <p>? These are targets that haven't yet been documented here. If you can shed some
 light on these platforms support, please create an issue or PR on the <a href="https://github.com/rust-lang/rust-forge">Rust
 Forge repo</a>.</p>
