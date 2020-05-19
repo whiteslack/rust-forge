@@ -155,11 +155,11 @@
 <h2><a class="header" href="#pull-request-triage" id="pull-request-triage">Pull Request Triage</a></h2>
 <h3><a class="header" href="#status-tags" id="status-tags">Status Tags</a></h3>
 <ul>
-<li><a href="https://github.com/rust-lang/rust/pulls?q=is%3Aopen+is%3Apr+sort%3Aupdated-asc+label%3AS-waiting-on-author+-label%3AI-nominated+-label%3Aneeds-fcp">S-waiting-on-author</a> - Author needs to make changes to address reviewer
+<li><a href="https://github.com/rust-lang/rust/pulls?q=is%3Aopen+draft%3Afalse+is%3Apr+sort%3Aupdated-asc+label%3AS-waiting-on-author+-label%3AI-nominated+-label%3Aneeds-fcp">S-waiting-on-author</a> - Author needs to make changes to address reviewer
 comments, or merge conflicts/test failures are present. This also covers more
 obscure cases, like a PR being blocked on another, or waiting for a <a href="https://github.com/rust-lang-nursery/crater">crater</a>
 run -- it is the author's responsibility to push the PR forward.</li>
-<li><a href="https://github.com/rust-lang/rust/pulls?q=is%3Aopen+is%3Apr+sort%3Aupdated-asc+label%3AS-waiting-on-review+-label%3AI-nominated+-label%3Aneeds-fcp">S-waiting-on-review</a> - Review is incomplete</li>
+<li><a href="https://github.com/rust-lang/rust/pulls?q=is%3Aopen+draft%3Afalse+is%3Apr+sort%3Aupdated-asc+label%3AS-waiting-on-review+-label%3AI-nominated+-label%3Aneeds-fcp">S-waiting-on-review</a> - Review is incomplete</li>
 <li><a href="https://github.com/rust-lang/rust/pulls?q=is%3Aopen+is%3Apr+label%3AS-waiting-on-team+sort%3Aupdated-desc">S-waiting-on-team</a> - A T- label is marked, and team has been cc-ed for
 feedback.</li>
 <li><a href="https://github.com/rust-lang/rust/pulls?q=is%3Aopen+is%3Apr+label%3AS-waiting-on-bors+sort%3Aupdated-asc">S-waiting-on-bors</a> - Currently approved, waiting to merge. Managed by <a href="https://github.com/rust-lang/homu">Bors</a>.</li>
@@ -197,7 +197,7 @@ the submitter as a regular contributor, leave a comment saying something like
 &quot;Thanks for the PR! We’ll periodically check in on it to make sure that
 @reviewer or someone else from the team reviews it soon.&quot;</p>
 <p>At this point, all PRs must have a tag applied.</p>
-<h4><a class="header" href="#a-hrefhttpsgithubcomrust-langrustpullsqis3aopenis3aprsort3aupdated-asclabel3as-waiting-on-author-label3ai-nominated-label3aneeds-fcps-waiting-on-author-prsa" id="a-hrefhttpsgithubcomrust-langrustpullsqis3aopenis3aprsort3aupdated-asclabel3as-waiting-on-author-label3ai-nominated-label3aneeds-fcps-waiting-on-author-prsa"><a href="https://github.com/rust-lang/rust/pulls?q=is%3Aopen+is%3Apr+sort%3Aupdated-asc+label%3AS-waiting-on-author+-label%3AI-nominated+-label%3Aneeds-fcp">S-waiting-on-author PRs</a></a></h4>
+<h4><a class="header" href="#a-hrefhttpsgithubcomrust-langrustpullsqis3aopendraft3afalseis3aprsort3aupdated-asclabel3as-waiting-on-author-label3ai-nominated-label3aneeds-fcps-waiting-on-author-prsa" id="a-hrefhttpsgithubcomrust-langrustpullsqis3aopendraft3afalseis3aprsort3aupdated-asclabel3as-waiting-on-author-label3ai-nominated-label3aneeds-fcps-waiting-on-author-prsa"><a href="https://github.com/rust-lang/rust/pulls?q=is%3Aopen+draft%3Afalse+is%3Apr+sort%3Aupdated-asc+label%3AS-waiting-on-author+-label%3AI-nominated+-label%3Aneeds-fcp">S-waiting-on-author PRs</a></a></h4>
 <p>PRs with, roughly, more than a week of inactivity need to be processed. These
 can be found by looking at the &quot;updated X days ago&quot; on GitHub's PR list.</p>
 <p>If the author hasn't responded for more than a week to a request for changes or
@@ -221,7 +221,7 @@ comment clearly identifying what is blocking the PR (something like &quot;This P
 appears to be blocked on #12345&quot;) and change the state to <code>S-blocked</code>. Follow
 the instruction for <code>S-blocked</code> to determine whether you should also close the
 PR.</p>
-<h4><a class="header" href="#a-hrefhttpsgithubcomrust-langrustpullsqis3aopenis3aprsort3aupdated-asclabel3as-waiting-on-review-label3ai-nominated-label3aneeds-fcps-waiting-on-review-prsa" id="a-hrefhttpsgithubcomrust-langrustpullsqis3aopenis3aprsort3aupdated-asclabel3as-waiting-on-review-label3ai-nominated-label3aneeds-fcps-waiting-on-review-prsa"><a href="https://github.com/rust-lang/rust/pulls?q=is%3Aopen+is%3Apr+sort%3Aupdated-asc+label%3AS-waiting-on-review+-label%3AI-nominated+-label%3Aneeds-fcp">S-waiting-on-review PRs</a></a></h4>
+<h4><a class="header" href="#a-hrefhttpsgithubcomrust-langrustpullsqis3aopendraft3afalseis3aprsort3aupdated-asclabel3as-waiting-on-review-label3ai-nominated-label3aneeds-fcps-waiting-on-review-prsa" id="a-hrefhttpsgithubcomrust-langrustpullsqis3aopendraft3afalseis3aprsort3aupdated-asclabel3as-waiting-on-review-label3ai-nominated-label3aneeds-fcps-waiting-on-review-prsa"><a href="https://github.com/rust-lang/rust/pulls?q=is%3Aopen+draft%3Afalse+is%3Apr+sort%3Aupdated-asc+label%3AS-waiting-on-review+-label%3AI-nominated+-label%3Aneeds-fcp">S-waiting-on-review PRs</a></a></h4>
 <p>PRs with, roughly, more than a week of inactivity need to be processed. These
 can be found by looking at the &quot;updated X days ago&quot; on GitHub's PR list.</p>
 <p>If the review is complete the label should be changed from <code>S-waiting-on-review</code>
