@@ -268,32 +268,13 @@ compiled, but for others <code>rustc</code> and <code>cargo</code> are too.</li>
 <tr><td><code>x86_64-unknown-netbsd</code></td><td>✓</td><td>✓</td><td>✓</td><td>NetBSD/amd64</td></tr>
 <tr><td><code>x86_64-unknown-redox</code></td><td>✓</td><td></td><td></td><td>Redox OS</td></tr>
 </tbody></table>
-<h2><a class="header" href="#tier-25" id="tier-25">Tier 2.5</a></h2>
-<p>Tier 2.5 platforms can be thought of as &quot;guaranteed to build&quot;, but without
-builds available through <code>rustup</code>. Automated tests are not run so it's not
-guaranteed to produce a working build, but platforms often work to quite a good
-degree and patches are always welcome! Specifically, these platforms are
-required to have each of the following:</p>
-<ul>
-<li>Automated building is set up, but may not be running tests.</li>
-<li>Landing changes to the <code>rust-lang/rust</code> repository's master branch is gated on
-platforms <strong>building</strong>. For some platforms only the standard library is
-compiled, but for others <code>rustc</code> and <code>cargo</code> are too.</li>
-</ul>
-<p><strong>This status is accidental: no new platforms should reach this state</strong></p>
-<table><thead><tr><th>target</th><th>std</th><th>rustc</th><th>cargo</th><th>notes</th></tr></thead><tbody>
-<tr><td><code>aarch64-unknown-cloudabi</code></td><td>✓</td><td></td><td></td><td>ARM64 CloudABI</td></tr>
-<tr><td><code>armv7-unknown-cloudabi-eabihf</code></td><td>✓</td><td></td><td></td><td>ARMv7 CloudABI, hardfloat</td></tr>
-<tr><td><code>i686-unknown-cloudabi</code></td><td>✓</td><td></td><td></td><td>32-bit CloudABI</td></tr>
-<tr><td><code>powerpc-unknown-linux-gnuspe</code></td><td>✓</td><td></td><td></td><td>PowerPC SPE Linux</td></tr>
-<tr><td><code>sparc-unknown-linux-gnu</code></td><td>✓</td><td></td><td></td><td>32-bit SPARC Linux</td></tr>
-</tbody></table>
 <h2><a class="header" href="#tier-3" id="tier-3">Tier 3</a></h2>
 <p>Tier 3 platforms are those which the Rust codebase has support for, but which
 are not built or tested automatically, and may not work. Official builds are
 not available.</p>
 <table><thead><tr><th>target</th><th>std</th><th>rustc</th><th>cargo</th><th>notes</th></tr></thead><tbody>
 <tr><td><code>aarch64-apple-tvos</code></td><td>**</td><td></td><td></td><td>ARM64 tvOS</td></tr>
+<tr><td><code>aarch64-unknown-cloudabi</code></td><td>✓</td><td></td><td></td><td>ARM64 CloudABI</td></tr>
 <tr><td><code>aarch64-unknown-freebsd</code></td><td>✓</td><td>✓</td><td>✓</td><td>ARM64 FreeBSD</td></tr>
 <tr><td><code>aarch64-unknown-hermit</code></td><td>?</td><td></td><td></td><td></td></tr>
 <tr><td><code>aarch64-unknown-netbsd</code></td><td>?</td><td></td><td></td><td></td></tr>
@@ -305,6 +286,7 @@ not available.</p>
 <tr><td><code>armv6-unknown-freebsd</code></td><td>✓</td><td>✓</td><td>✓</td><td>ARMv6 FreeBSD</td></tr>
 <tr><td><code>armv6-unknown-netbsd-eabihf</code></td><td>?</td><td></td><td></td><td></td></tr>
 <tr><td><code>armv7-apple-ios</code></td><td>✓</td><td></td><td></td><td>RMv7 iOS, Cortex-</td></tr>
+<tr><td><code>armv7-unknown-cloudabi-eabihf</code></td><td>✓</td><td></td><td></td><td>ARMv7 CloudABI, hardfloat</td></tr>
 <tr><td><code>armv7-unknown-freebsd</code></td><td>✓</td><td>✓</td><td>✓</td><td>ARMv7 FreeBSD</td></tr>
 <tr><td><code>armv7-unknown-netbsd-eabihf</code></td><td>?</td><td></td><td></td><td></td></tr>
 <tr><td><code>armv7-wrs-vxworks-eabihf</code></td><td>?</td><td></td><td></td><td></td></tr>
@@ -314,6 +296,7 @@ not available.</p>
 <tr><td><code>i386-apple-ios</code></td><td>✓</td><td></td><td></td><td>32-bit x86 iOS</td></tr>
 <tr><td><code>i686-apple-darwin</code></td><td>✓</td><td>✓</td><td>✓</td><td>32-bit OSX (10.7+, Lion+)</td></tr>
 <tr><td><code>i686-pc-windows-msvc</code></td><td>✓</td><td></td><td></td><td>32-bit Windows XP support</td></tr>
+<tr><td><code>i686-unknown-cloudabi</code></td><td>✓</td><td></td><td></td><td>32-bit CloudABI</td></tr>
 <tr><td><code>i686-unknown-uefi</code></td><td>?</td><td></td><td></td><td>32-bit UEFI</td></tr>
 <tr><td><code>i686-unknown-haiku</code></td><td>✓</td><td>✓</td><td>✓</td><td>32-bit Haiku</td></tr>
 <tr><td><code>i686-unknown-netbsd</code></td><td>✓</td><td></td><td></td><td>NetBSD/i386 with SSE2</td></tr>
@@ -328,6 +311,7 @@ not available.</p>
 <tr><td><code>mipsisa64r6-unknown-linux-gnuabi64</code></td><td>?</td><td></td><td></td><td></td></tr>
 <tr><td><code>mipsisa64r6el-unknown-linux-gnuabi64</code></td><td>?</td><td></td><td></td><td></td></tr>
 <tr><td><code>msp430-none-elf</code></td><td>*</td><td></td><td></td><td>16-bit MSP430 microcontrollers</td></tr>
+<tr><td><code>powerpc-unknown-linux-gnuspe</code></td><td>✓</td><td></td><td></td><td>PowerPC SPE Linux</td></tr>
 <tr><td><code>powerpc-unknown-linux-musl</code></td><td>?</td><td></td><td></td><td></td></tr>
 <tr><td><code>powerpc-unknown-netbsd</code></td><td>?</td><td></td><td></td><td></td></tr>
 <tr><td><code>powerpc-wrs-vxworks</code></td><td>?</td><td></td><td></td><td></td></tr>
@@ -336,6 +320,7 @@ not available.</p>
 <tr><td><code>powerpc64-unknown-linux-musl</code></td><td>?</td><td></td><td></td><td></td></tr>
 <tr><td><code>powerpc64-wrs-vxworks</code></td><td>?</td><td></td><td></td><td></td></tr>
 <tr><td><code>powerpc64le-unknown-linux-musl</code></td><td>?</td><td></td><td></td><td></td></tr>
+<tr><td><code>sparc-unknown-linux-gnu</code></td><td>✓</td><td></td><td></td><td>32-bit SPARC Linux</td></tr>
 <tr><td><code>sparc64-unknown-netbsd</code></td><td>✓</td><td>✓</td><td></td><td>NetBSD/sparc64</td></tr>
 <tr><td><code>sparc64-unknown-openbsd</code></td><td>?</td><td></td><td></td><td></td></tr>
 <tr><td><code>thumbv7a-pc-windows-msvc</code></td><td>?</td><td></td><td></td><td></td></tr>
