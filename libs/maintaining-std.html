@@ -296,8 +296,6 @@ let c = a + &amp;b;
 <p>Changes to hot code might impact performance in consumers, for better or for worse. Appropriate benchmarks should give an idea of how performance characteristics change. For changes that affect <code>rustc</code> itself, you can also do a <a href="https://github.com/rust-lang-nursery/rustc-perf"><code>rust-timer</code></a> run.</p>
 <h3><a class="header" href="#is-the-commit-log-tidy" id="is-the-commit-log-tidy">Is the commit log tidy?</a></h3>
 <p>PRs shouldn’t have merge commits in them. If they become out of date with <code>master</code> then they need to be rebased.</p>
-<h3><a class="header" href="#are-functions-const-stabilized-or-constified" id="are-functions-const-stabilized-or-constified">Are functions const-stabilized or constified?</a></h3>
-<p>Please CC <code>@rust-lang/wg-const-eval</code>.</p>
 <h2><a class="header" href="#merging-prs" id="merging-prs">Merging PRs</a></h2>
 <p>PRs to <a href="https://github.com/rust-lang/rust"><code>rust-lang/rust</code></a> aren’t merged manually using GitHub’s UI or by pushing remote branches. Everything goes through <a href="https://github.com/rust-lang/homu"><code>bors</code></a>.</p>
 <h3><a class="header" href="#when-to-rollup" id="when-to-rollup">When to <code>rollup</code></a></h3>
@@ -311,6 +309,10 @@ let c = a + &amp;b;
 <h3><a class="header" href="#when-a-feature-is-being-stabilized" id="when-a-feature-is-being-stabilized">When a feature is being stabilized</a></h3>
 <p>Features can be stabilized in a PR that replaces <code>#[unstable]</code> attributes with <code>#[stable]</code> ones. The feature needs to have an accepted RFC before stabilizing. They also need to go through a FCP before merging.</p>
 <p>You can find the right version to use in the <code>#[stable]</code> attribute by checking the <a href="https://forge.rust-lang.org/">Forge</a>.</p>
+<h3><a class="header" href="#when-a-const-function-is-being-stabilized" id="when-a-const-function-is-being-stabilized">When a <code>const</code> function is being stabilized</a></h3>
+<p>Const functions can be stabilized in a PR that replaces <code>#[rustc_const_unstable]</code> attributes with <code>#[rustc_const_stable]</code> ones. The <a href="https://github.com/rust-lang/const-eval">Constant Evaluation WG</a> should be pinged for input on whether or not the <code>const</code>-ness is something we want to commit to. If it is an intrinsic being exposed that is const-stabilized then <code>@rust-lang/lang</code> should also be included in the FCP.</p>
+<p>Check whether the function internally depends on other unstable <code>const</code> functions through <code>#[allow_internal_unstable]</code> attributes and consider how the function could be implemented if its internally unstable calls were removed. See the <em>Stability attributes</em> page for more details on <code>#[allow_internal_unstable]</code>.</p>
+<p>Where <code>unsafe</code> and <code>const</code> is involved, e.g., for operations which are &quot;unconst&quot;, that the const safety argument for the usage also be documented. That is, a <code>const fn</code> has additional determinism (e.g. run-time/compile-time results must correspond and the function's output only depends on its inputs...) restrictions that must be preserved, and those should be argued when <code>unsafe</code> is used.</p>
 
                     </main>
 
