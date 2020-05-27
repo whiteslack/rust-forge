@@ -152,21 +152,19 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#crate-removal-procedure" id="crate-removal-procedure">Crate removal procedure</a></h1>
-<blockquote>
-<p><strong>Status 2020-01-21</strong>: this document is incomplete and unvetted. We anticipate to
-be receiving guidelines from Mozilla Legal in the near future. If this notice
-is still here on 2020-03-21, please comment on <a href="https://github.com/rust-lang/crates-io-cargo-teams/issues/63">this issue</a>
-asking for a status update.</p>
-</blockquote>
 <p>If we get a DMCA takedown notice, here's what needs to happen:</p>
+<h2><a class="header" href="#contact-mozilla-legal" id="contact-mozilla-legal">Contact Mozilla Legal</a></h2>
+<p>Before removing the crates, <a href="../core/legal.html">get in touch with legal</a> and ask
+an opinion from them on the received request and whether we have to comply with
+it.</p>
 <h2><a class="header" href="#remove-relevant-versions-andor-entire-crates-from-cratesio" id="remove-relevant-versions-andor-entire-crates-from-cratesio">Remove relevant version(s) and/or entire crates from crates.io</a></h2>
 <ul>
 <li>
 <p>Remove it from the database:</p>
-<pre><code>heroku run -- cargo run --bin delete-crate [crate-name]
+<pre><code>heroku run -a crates-io -- target/release/delete-crate [crate-name]
 </code></pre>
 <p>or</p>
-<pre><code>heroku run -- cargo run --bin delete-version [crate-name] [version-number]
+<pre><code>heroku run -a crates-io -- target/release/delete-version [crate-name] [version-number]
 </code></pre>
 </li>
 <li>
@@ -189,9 +187,7 @@ to access the server and run it are:</p>
 <ul>
 <li>docs.rs Team:
 <ul>
-<li><a href="https://github.com/QuietMisdreavus">@QuietMisdreavus</a></li>
 <li><a href="https://github.com/pietroalbini">@pietroalbini</a></li>
-<li><a href="https://github.com/onur">@onur</a></li>
 <li><a href="https://github.com/jyn514">@jyn514</a></li>
 </ul>
 </li>
