@@ -176,8 +176,9 @@ relevant version.</p>
 <p>Remove the crate archive(s) and readme file(s) from S3.</p>
 </li>
 <li>
-<p>Invalidate the CloudFront cache – remove both the relevant readme and crate
-files. If in doubt, invalidate <code>/*</code> to flush everything.</p>
+<p>Invalidate the CloudFront cache:</p>
+<pre><code>aws cloudfront create-invalidation --distribution-id EJED5RT0WA7HA --paths '/*'
+</code></pre>
 </li>
 </ul>
 <h2><a class="header" href="#remove-entire-crates-from-docsrs" id="remove-entire-crates-from-docsrs">Remove entire crates from docs.rs</a></h2>
