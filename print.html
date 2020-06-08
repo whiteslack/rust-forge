@@ -706,14 +706,13 @@ highlight what has changed, to help the reviewer).</p>
 <p>Stabilization generally proceeds when the option has a seen a bit of use and the implementation seems to be working as expected for its intended purpose.</p>
 <p>Remember that when stabilization occurs, documentation should be moved from the Unstable Book to the Rustc Book.</p>
 <h1><a class="header" href="#major-change-proposals" id="major-change-proposals">Major Change Proposals</a></h1>
-<p>Introduced in [RFC 2904], a &quot;major change proposal&quot; is a lightweight
+<p>Introduced in <a href="https://github.com/rust-lang/rfcs/blob/master/text/2904-compiler-major-change-process.md">RFC 2904</a>, a &quot;major change proposal&quot; is a lightweight
 form of RFC that the compiler team uses for architectural changes that
 are not end-user facing. (It can also be used for small user-facing
 changes like adding new compiler flags, though in that case we also
 require an <code>rfcbot fcp</code> to get full approval from the team.) Larger
 changes or modifications to the Rust language itself require a full
 RFC (the latter fall under the lang team's purview).</p>
-<p>[RFC 2904] https://github.com/rust-lang/rfcs/blob/master/text/2904-compiler-major-change-process.md</p>
 <h2><a class="header" href="#motivation" id="motivation">Motivation</a></h2>
 <p>As the compiler grows in complexity, it becomes harder and harder to track what's going on. We don't currently have a clear channel for people to signal their intention to make &quot;major changes&quot; that may impact other developers in a lightweight way (and potentially receive feedback).</p>
 <p>Our goal is to create a channel for signaling intentions that lies somewhere between opening a PR (and perhaps cc'ing others on that PR) and creating a compiler team design meeting proposal or RFC.</p>
