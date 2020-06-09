@@ -165,11 +165,15 @@ reviewer with bors privileges (e.g., a <a href="./membership.html">compiler
 contributor</a> will leave a comment like <code>@bors r+</code>.
 This indicates that they approve the PR.</p>
 <p>People with bors privileges may also leave a <code>@bors r=username</code>
-command. This indicates that the PR was already apporved by
+command. This indicates that the PR was already approved by
 <code>@username</code>. This is commonly done after rebasing.</p>
 <p>Finally, in some cases, PRs can be &quot;delegated&quot; by writing <code>@bors delegate+</code> or <code>@bors delegate=username</code>. This will allow the PR author
 to approve the PR by issuing <code>@bors</code> commands like the ones above
 (but this privilege is limited to the single PR).</p>
+<h2><a class="header" href="#high-priority-issues" id="high-priority-issues">High priority issues</a></h2>
+<p>When merging high priority issues (<code>P-critical</code> and <code>P-high</code>) it's
+recommended to avoid rollups and bump a bit the priority of the PR in
+the homu queue by issuing <code>@bors r+ rollup=never p=1</code>.</p>
 <h2><a class="header" href="#expectations-for-r" id="expectations-for-r">Expectations for r+</a></h2>
 <p>bors privileges are binary: the bot doesn't know which code you are
 familiar with and what code you are not. They must therefore be used
