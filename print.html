@@ -4360,7 +4360,7 @@ commit and run (replacing <code>BRANCH_NAME</code> with the name of the branch):
 <p>The Rust project has a policy that every pull request must be tested after merge
 before it can be pushed to master. As PR volume increases this can scale poorly,
 especially given the long (~3.5hr) current CI duration for Rust.</p>
-<p>Enter rollups - changes that small, not performance sensitive, or not platform
+<p>Enter rollups! Changes that are small, not performance sensitive, or not platform
 dependent are marked with the <code>rollup</code> command to bors (<code>@bors r+ rollup</code> to
 approve a PR and mark as a rollup, <code>@bors rollup</code> to mark a previously approved
 PR, <code>@bors rollup-</code> to un-mark as a rollup).  'Performing a Rollup' then means
