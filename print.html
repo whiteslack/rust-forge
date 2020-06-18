@@ -694,6 +694,7 @@ highlight what has changed, to help the reviewer).</p>
 <p>Once you've written up the proposal, you can <a href="https://github.com/rust-lang/compiler-team/issues/new?assignees=&amp;labels=major-change%2C+T-compiler&amp;template=major_change.md&amp;title=%28My+major+change+proposal%29">open a MCP</a> issue. But note that since this MCP is promoting a permanent change, a full compiler-team FCP is required, and not just a &quot;second&quot;. This can be done by <code>@rfcbot fcp merge</code> by a team member.</p>
 <h3><a class="header" href="#implementation-documentation" id="implementation-documentation">Implementation, documentation</a></h3>
 <p>Naturally your new option will also have to be implemented. You can implement the option and open up a PR. Often, this implementation work actually happens <strong>before</strong> the MCP is created, and that's fine -- we'll just ask you to open an MCP with the write-up.</p>
+<p>See the <a href="https://rustc-dev-guide.rust-lang.org/cli.html">Command-line Arguments</a> chapter in the rustc dev guide for guidelines on how to name and define a new argument.</p>
 <p>A few notes that are sometimes overlooked:</p>
 <ul>
 <li>Many options begin as &quot;unstable&quot; options, either because they use <code>-Z</code> or because they require <code>-Zunstable-options</code> to use.</li>
