@@ -5,12 +5,19 @@
         <meta charset="UTF-8">
         <title>Maintaining the standard library - Rust Forge</title>
         
+        
+
+
+        <!-- Custom HTML head -->
+        
+
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="Supplemental documentation for contributing to The Rust Programming Language">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        <link rel="icon" href="../favicon.svg">
         <link rel="shortcut icon" href="../favicon.png">
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
@@ -19,8 +26,9 @@
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -36,7 +44,7 @@
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -208,15 +216,15 @@
 <p>A lot of PRs to the standard library are adding new impls for already stable traits, which can break consumers in many weird and wonderful ways. The following sections gives some examples of breakage from new trait impls that may not be obvious just from the change made to the standard library.</p>
 <h4><a class="header" href="#inference-breaks-when-a-second-generic-impl-is-introduced" id="inference-breaks-when-a-second-generic-impl-is-introduced">Inference breaks when a second generic impl is introduced</a></h4>
 <p>Rust will use the fact that there's only a single impl for a generic trait during inference. This breaks once a second impl makes the type of that generic ambiguous. Say we have:</p>
-<pre><pre class="playpen"><code class="language-rust">
-<span class="boring">#![allow(unused_variables)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// in `std`
 impl From&lt;&amp;str&gt; for Arc&lt;str&gt; { .. }
 <span class="boring">}
 </span></code></pre></pre>
-<pre><pre class="playpen"><code class="language-rust">
-<span class="boring">#![allow(unused_variables)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// in an external `lib`
 let b = Arc::from(&quot;a&quot;);
@@ -227,8 +235,8 @@ let b = Arc::from(&quot;a&quot;);
 + impl From&lt;&amp;str&gt; for Arc&lt;String&gt; { .. }
 </code></pre>
 <p>then</p>
-<pre><pre class="playpen"><code class="language-rust">
-<span class="boring">#![allow(unused_variables)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let b = Arc::from(&quot;a&quot;);
 <span class="boring">}
@@ -237,8 +245,8 @@ let b = Arc::from(&quot;a&quot;);
 <p>This kind of breakage can be ok, but a <a href="https://github.com/rust-lang/crater"><code>crater</code></a> run should estimate the scope.</p>
 <h4><a class="header" href="#deref-coercion-breaks-when-a-new-impl-is-introduced" id="deref-coercion-breaks-when-a-new-impl-is-introduced">Deref coercion breaks when a new impl is introduced</a></h4>
 <p>Rust will use deref coercion to find a valid trait impl if the arguments don't type check directly. This only seems to occur if there's a single impl so introducing a new one may break consumers relying on deref coercion. Say we have:</p>
-<pre><pre class="playpen"><code class="language-rust">
-<span class="boring">#![allow(unused_variables)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// in `std`
 impl Add&lt;&amp;str&gt; for String { .. }
@@ -246,8 +254,8 @@ impl Add&lt;&amp;str&gt; for String { .. }
 impl Deref for String { type Target = str; .. }
 <span class="boring">}
 </span></code></pre></pre>
-<pre><pre class="playpen"><code class="language-rust">
-<span class="boring">#![allow(unused_variables)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// in an external `lib`
 let a = String::from(&quot;a&quot;);
@@ -261,8 +269,8 @@ let c = a + &amp;b;
 + impl Add&lt;char&gt; for String { .. }
 </code></pre>
 <p>then</p>
-<pre><pre class="playpen"><code class="language-rust">
-<span class="boring">#![allow(unused_variables)]
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let c = a + &amp;b;
 <span class="boring">}
@@ -356,10 +364,10 @@ let c = a + &amp;b;
         
 
         
-        
+
         
         <script type="text/javascript">
-            window.playpen_copyable = true;
+            window.playground_copyable = true;
         </script>
         
 
