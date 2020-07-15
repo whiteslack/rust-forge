@@ -1240,14 +1240,14 @@ The working group focuses mainly on triaging <code>T-compiler</code> and <code>l
 <h2><a class="header" href="#the-procedure-in-detail" id="the-procedure-in-detail">The procedure in detail</a></h2>
 <p>High level overview:</p>
 <ul>
-<li><a href="compiler/prioritization/procedure.html#Follow-ups-from-previous-meeting">Follow ups from previous meeting</a>
+<li><a href="compiler/prioritization/procedure.html#follow-ups-from-previous-meeting">Follow ups from previous meeting</a>
 <ul>
 <li>Remove <code>I-nominated</code> tags of already discussed issues</li>
 <li>Notify @pnkfelix about not properly tagged stable/beta-nominated issues</li>
 <li>Create the next meeting agenda using the weekly agenda template</li>
 </ul>
 </li>
-<li><a href="compiler/prioritization/procedure.html#Prepare-agenda-content">Prepare agenda content</a>
+<li><a href="compiler/prioritization/procedure.html#prepare-agenda-content">Prepare agenda content</a>
 <ul>
 <li>Add <code>T-compiler</code> and <code>libs-impl</code> to unlabelled T-compiler and libs-impl issues</li>
 <li>Assign priority to unprioritized issues with &quot;I-prioritize&quot; label</li>
@@ -1255,7 +1255,7 @@ The working group focuses mainly on triaging <code>T-compiler</code> and <code>l
 <li>Process MCPs/FCPs</li>
 </ul>
 </li>
-<li><a href="compiler/prioritization/procedure.html#Generate-Agenda">Generate Agenda</a>
+<li><a href="compiler/prioritization/procedure.html#generate-agenda">Generate Agenda</a>
 <ul>
 <li>Run cli to generate agenda</li>
 <li>Fill agenda announcements</li>
@@ -1266,13 +1266,13 @@ The working group focuses mainly on triaging <code>T-compiler</code> and <code>l
 <li>Summarize I-nominated issues</li>
 </ul>
 </li>
-<li><a href="compiler/prioritization/procedure.html#Notify-the-team-about-the-meeting">Notify the team about the meeting</a>
+<li><a href="compiler/prioritization/procedure.html#notify-the-team-about-the-meeting">Notify the team about the meeting</a>
 <ul>
 <li>Figure out which WGs need to check-in</li>
 <li>Notify @T-compiler/meeting about the meeting on Zulip</li>
 </ul>
 </li>
-<li><a href="compiler/prioritization/procedure.html#Final-reviews">Final reviews</a>
+<li><a href="compiler/prioritization/procedure.html#final-reviews">Final reviews</a>
 <ul>
 <li>Check toolstate</li>
 <li>Check performance stats</li>
@@ -1308,7 +1308,7 @@ The working group focuses mainly on triaging <code>T-compiler</code> and <code>l
 Note #2: These lists should typically be empty when we are close to the meeting.</p>
 <h4><a class="header" href="#assign-priority-to-regressions-without-a-p-label" id="assign-priority-to-regressions-without-a-p-label">Assign priority to regressions without a P-label</a></h4>
 <p>We should not have unprioritized regressions (<a href="https://github.com/rust-lang/rust/issues?q=is%3Aopen+label%3Aregression-from-stable-to-stable+-label%3AP-critical+-label%3AP-high+-label%3AP-medium+-label%3AP-low+-label%3AT-infra+-label%3AT-libs+-label%3AT-release+-label%3AT-rustdoc">stable</a>, <a href="https://github.com/rust-lang/rust/issues?q=is%3Aopen+label%3Aregression-from-stable-to-beta+-label%3AP-critical+-label%3AP-high+-label%3AP-medium+-label%3AP-low+-label%3AT-infra+-label%3AT-libs+-label%3AT-release+-label%3AT-rustdoc">beta</a> and <a href="https://github.com/rust-lang/rust/issues?q=is%3Aopen+label%3Aregression-from-stable-to-nightly+-label%3AP-critical+-label%3AP-high+-label%3AP-medium+-label%3AP-low+-label%3AT-infra+-label%3AT-libs+-label%3AT-release+-label%3AT-rustdoc">nightly</a>) and ideally regressions should have an assignee.</p>
-<p>The procedure here follows the <a href="compiler/prioritization/procedure.html#General-issues-review-process">General issues review process</a>.</p>
+<p>The procedure here follows the <a href="compiler/prioritization/procedure.html#general-issues-review-process">General issues review process</a>.</p>
 <p>Note: triagebot automatically adds <code>I-prioritize</code> to all regression issues and creates a topic and notify @<em>WG-prioritization</em> members requesting prioritization.</p>
 <h4><a class="header" href="#accept-mcps" id="accept-mcps">Accept MCPs</a></h4>
 <p>Accept all <a href="https://github.com/rust-lang/compiler-team/issues?q=is%3Aissue+is%3Aopen+label%3Amajor-change+label%3Afinal-comment-period">MCPs that have been on <code>final-comment-period</code></a> for 10 or more days. Basically check that <code>final-comment-period</code> label was added more than 10 days ago.
@@ -1346,7 +1346,7 @@ For now fix announcements output manually. Remove the nonsense no fcps kind of l
 <p>Note: triagebot automatically creates a topic and notify @<em>WG-prioritization</em> members requesting addition to the agenda.</p>
 <h4><a class="header" href="#summarize-prs-waiting-on-team" id="summarize-prs-waiting-on-team">Summarize PR's waiting on team</a></h4>
 <p>These are PRs waiting for some decision by our team (<code>T-compiler</code> or <code>libs-impl</code>).</p>
-<p>Try to follow the <a href="compiler/prioritization/procedure.html#General-issues-review-process">General issues review process</a>.</p>
+<p>Try to follow the <a href="compiler/prioritization/procedure.html#general-issues-review-process">General issues review process</a>.</p>
 <p>We should:</p>
 <ul>
 <li>Add them to the agenda explaining:
@@ -1359,7 +1359,7 @@ For now fix announcements output manually. Remove the nonsense no fcps kind of l
 </ul>
 <p>Note: triagebot automatically creates a topic and notify @<em>WG-prioritization</em> members requesting addition to the agenda.</p>
 <h4><a class="header" href="#summarize-p-critical-and-unassigned-p-high-regressions" id="summarize-p-critical-and-unassigned-p-high-regressions">Summarize <code>P-critical</code> and unassigned <code>P-high</code> regressions</a></h4>
-<p>Try to follow the <a href="compiler/prioritization/procedure.html#General-issues-review-process">General issues review process</a>.</p>
+<p>Try to follow the <a href="compiler/prioritization/procedure.html#general-issues-review-process">General issues review process</a>.</p>
 <p>We should:</p>
 <ul>
 <li><a href="https://rustc-dev-guide.rust-lang.org/notification-groups/about.html">Notify the appropriate groups</a></li>
@@ -1369,7 +1369,7 @@ For now fix announcements output manually. Remove the nonsense no fcps kind of l
 <p>Note: triagebot automatically creates a topic and notify @<em>WG-prioritization</em> members requesting addition to the agenda.</p>
 <h4><a class="header" href="#summarize-i-nominated-issues" id="summarize-i-nominated-issues">Summarize I-nominated issues</a></h4>
 <p>Issues labeled with <code>I-nominated</code> are important issues that we decide deserve discussion during the weekly meeting.</p>
-<p>Try to follow the <a href="compiler/prioritization/procedure.html#General-issues-review-process">General issues review process</a>.</p>
+<p>Try to follow the <a href="compiler/prioritization/procedure.html#general-issues-review-process">General issues review process</a>.</p>
 <p>We should:</p>
 <ul>
 <li>Check if these issues were already discussed and in that case remove <code>I-nominated</code> label</li>
