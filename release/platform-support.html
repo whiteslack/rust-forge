@@ -179,11 +179,11 @@ tests passing.</li>
 <table><thead><tr><th>target</th><th>std</th><th>rustc</th><th>cargo</th><th>notes</th></tr></thead><tbody>
 <tr><td><code>i686-pc-windows-gnu</code></td><td>✓</td><td>✓</td><td>✓</td><td>32-bit MinGW (Windows 7+)</td></tr>
 <tr><td><code>i686-pc-windows-msvc</code></td><td>✓</td><td>✓</td><td>✓</td><td>32-bit MSVC (Windows 7+)</td></tr>
-<tr><td><code>i686-unknown-linux-gnu</code></td><td>✓</td><td>✓</td><td>✓</td><td>32-bit Linux (2.6.18+)</td></tr>
+<tr><td><code>i686-unknown-linux-gnu</code></td><td>✓</td><td>✓</td><td>✓</td><td>32-bit Linux (kernel 2.6.32+, glibc 2.11+)</td></tr>
 <tr><td><code>x86_64-apple-darwin</code></td><td>✓</td><td>✓</td><td>✓</td><td>64-bit OSX (10.7+, Lion+)</td></tr>
 <tr><td><code>x86_64-pc-windows-gnu</code></td><td>✓</td><td>✓</td><td>✓</td><td>64-bit MinGW (Windows 7+)</td></tr>
 <tr><td><code>x86_64-pc-windows-msvc</code></td><td>✓</td><td>✓</td><td>✓</td><td>64-bit MSVC (Windows 7+)</td></tr>
-<tr><td><code>x86_64-unknown-linux-gnu</code></td><td>✓</td><td>✓</td><td>✓</td><td>64-bit Linux (2.6.18+)</td></tr>
+<tr><td><code>x86_64-unknown-linux-gnu</code></td><td>✓</td><td>✓</td><td>✓</td><td>64-bit Linux (kernel 2.6.32+, glibc 2.11+)</td></tr>
 </tbody></table>
 <h2><a class="header" href="#tier-2" id="tier-2">Tier 2</a></h2>
 <p>Tier 2 platforms can be thought of as &quot;guaranteed to build&quot;. Automated tests
@@ -202,61 +202,61 @@ compiled, but for others <code>rustc</code> and <code>cargo</code> are too.</li>
 <tr><td><code>aarch64-fuchsia</code></td><td>✓</td><td></td><td></td><td>ARM64 Fuchsia</td></tr>
 <tr><td><code>aarch64-linux-android</code></td><td>✓</td><td></td><td></td><td>ARM64 Android</td></tr>
 <tr><td><code>aarch64-pc-windows-msvc</code></td><td>✓</td><td></td><td></td><td>ARM64 Windows MSVC</td></tr>
-<tr><td><code>aarch64-unknown-linux-gnu</code></td><td>✓</td><td>✓</td><td>✓</td><td>ARM64 Linux</td></tr>
+<tr><td><code>aarch64-unknown-linux-gnu</code></td><td>✓</td><td>✓</td><td>✓</td><td>ARM64 Linux (kernel 4.2, glibc 2.17)</td></tr>
 <tr><td><code>aarch64-unknown-linux-musl</code></td><td>✓</td><td></td><td></td><td>ARM64 Linux with MUSL</td></tr>
 <tr><td><code>aarch64-unknown-none</code></td><td>*</td><td></td><td></td><td>Bare ARM64, hardfloat</td></tr>
 <tr><td><code>aarch64-unknown-none-softfloat</code></td><td>*</td><td></td><td></td><td>Bare ARM64, softfloat</td></tr>
 <tr><td><code>arm-linux-androideabi</code></td><td>✓</td><td></td><td></td><td>ARMv7 Android</td></tr>
-<tr><td><code>arm-unknown-linux-gnueabi</code></td><td>✓</td><td>✓</td><td>✓</td><td>ARMv6 Linux</td></tr>
-<tr><td><code>arm-unknown-linux-gnueabihf</code></td><td>✓</td><td>✓</td><td>✓</td><td>ARMv6 Linux, hardfloat</td></tr>
+<tr><td><code>arm-unknown-linux-gnueabi</code></td><td>✓</td><td>✓</td><td>✓</td><td>ARMv6 Linux (kernel 3.2, glibc 2.17)</td></tr>
+<tr><td><code>arm-unknown-linux-gnueabihf</code></td><td>✓</td><td>✓</td><td>✓</td><td>ARMv6 Linux, hardfloat (kernel 3.2, glibc 2.17)</td></tr>
 <tr><td><code>arm-unknown-linux-musleabi</code></td><td>✓</td><td></td><td></td><td>ARMv6 Linux with MUSL</td></tr>
 <tr><td><code>arm-unknown-linux-musleabihf</code></td><td>✓</td><td></td><td></td><td>ARMv6 Linux with MUSL, hardfloat</td></tr>
 <tr><td><code>armebv7r-none-eabi</code></td><td>*</td><td></td><td></td><td>Bare ARMv7-R, Big Endian</td></tr>
 <tr><td><code>armebv7r-none-eabihf</code></td><td>*</td><td></td><td></td><td>Bare ARMv7-R, Big Endian, hardfloat</td></tr>
-<tr><td><code>armv5te-unknown-linux-gnueabi</code></td><td>✓</td><td></td><td></td><td>ARMv5TE Linux</td></tr>
+<tr><td><code>armv5te-unknown-linux-gnueabi</code></td><td>✓</td><td></td><td></td><td>ARMv5TE Linux (kernel 4.4, glibc 2.23)</td></tr>
 <tr><td><code>armv5te-unknown-linux-musleabi</code></td><td>✓</td><td></td><td></td><td>ARMv5TE Linux with MUSL</td></tr>
 <tr><td><code>armv7-linux-androideabi</code></td><td>✓</td><td></td><td></td><td>ARMv7a Android</td></tr>
 <tr><td><code>armv7a-none-eabi</code></td><td>*</td><td></td><td></td><td>Bare ARMv7-A</td></tr>
 <tr><td><code>armv7r-none-eabi</code></td><td>*</td><td></td><td></td><td>Bare ARMv7-R</td></tr>
 <tr><td><code>armv7r-none-eabihf</code></td><td>*</td><td></td><td></td><td>Bare ARMv7-R, hardfloat</td></tr>
-<tr><td><code>armv7-unknown-linux-gnueabi</code></td><td>✓</td><td></td><td></td><td>ARMv7 Linux, glibc</td></tr>
-<tr><td><code>armv7-unknown-linux-gnueabihf</code></td><td>✓</td><td>✓</td><td>✓</td><td>ARMv7 Linux, hardfloat</td></tr>
+<tr><td><code>armv7-unknown-linux-gnueabi</code></td><td>✓</td><td></td><td></td><td>ARMv7 Linux (kernel 4.15, glibc 2.27)</td></tr>
+<tr><td><code>armv7-unknown-linux-gnueabihf</code></td><td>✓</td><td>✓</td><td>✓</td><td>ARMv7 Linux, hardfloat (kernel 3.2, glibc 2.17)</td></tr>
 <tr><td><code>armv7-unknown-linux-musleabi</code></td><td>✓</td><td></td><td></td><td>ARMv7 Linux, MUSL</td></tr>
 <tr><td><code>armv7-unknown-linux-musleabihf</code></td><td>✓</td><td></td><td></td><td>ARMv7 Linux with MUSL</td></tr>
 <tr><td><code>asmjs-unknown-emscripten</code></td><td>✓</td><td></td><td></td><td>asm.js via Emscripten</td></tr>
 <tr><td><code>i586-pc-windows-msvc</code></td><td>✓</td><td></td><td></td><td>32-bit Windows w/o SSE</td></tr>
-<tr><td><code>i586-unknown-linux-gnu</code></td><td>✓</td><td></td><td></td><td>32-bit Linux w/o SSE</td></tr>
+<tr><td><code>i586-unknown-linux-gnu</code></td><td>✓</td><td></td><td></td><td>32-bit Linux w/o SSE (kernel 4.4, glibc 2.23)</td></tr>
 <tr><td><code>i586-unknown-linux-musl</code></td><td>✓</td><td></td><td></td><td>32-bit Linux w/o SSE, MUSL</td></tr>
 <tr><td><code>i686-linux-android</code></td><td>✓</td><td></td><td></td><td>32-bit x86 Android</td></tr>
 <tr><td><code>i686-unknown-freebsd</code></td><td>✓</td><td>✓</td><td>✓</td><td>32-bit FreeBSD</td></tr>
 <tr><td><code>i686-unknown-linux-musl</code></td><td>✓</td><td></td><td></td><td>32-bit Linux with MUSL</td></tr>
-<tr><td><code>mips-unknown-linux-gnu</code></td><td>✓</td><td>✓</td><td>✓</td><td>MIPS Linux</td></tr>
+<tr><td><code>mips-unknown-linux-gnu</code></td><td>✓</td><td>✓</td><td>✓</td><td>MIPS Linux (kernel 4.4, glibc 2.23)</td></tr>
 <tr><td><code>mips-unknown-linux-musl</code></td><td>✓</td><td></td><td></td><td>MIPS Linux with MUSL</td></tr>
-<tr><td><code>mips64-unknown-linux-gnuabi64</code></td><td>✓</td><td>✓</td><td>✓</td><td>MIPS64 Linux, n64 ABI</td></tr>
+<tr><td><code>mips64-unknown-linux-gnuabi64</code></td><td>✓</td><td>✓</td><td>✓</td><td>MIPS64 Linux, n64 ABI (kernel 4.4, glibc 2.23)</td></tr>
 <tr><td><code>mips64-unknown-linux-muslabi64</code></td><td>✓</td><td></td><td></td><td>MIPS64 Linux, n64 ABI, MUSL</td></tr>
-<tr><td><code>mips64el-unknown-linux-gnuabi64</code></td><td>✓</td><td>✓</td><td>✓</td><td>MIPS64 (LE) Linux, n64 ABI</td></tr>
+<tr><td><code>mips64el-unknown-linux-gnuabi64</code></td><td>✓</td><td>✓</td><td>✓</td><td>MIPS64 (LE) Linux, n64 ABI (kernel 4.4, glibc 2.23)</td></tr>
 <tr><td><code>mips64el-unknown-linux-muslabi64</code></td><td>✓</td><td></td><td></td><td>MIPS64 (LE) Linux, n64 ABI, MUSL</td></tr>
-<tr><td><code>mipsel-unknown-linux-gnu</code></td><td>✓</td><td>✓</td><td>✓</td><td>MIPS (LE) Linux</td></tr>
+<tr><td><code>mipsel-unknown-linux-gnu</code></td><td>✓</td><td>✓</td><td>✓</td><td>MIPS (LE) Linux (kernel 4.4, glibc 2.23)</td></tr>
 <tr><td><code>mipsel-unknown-linux-musl</code></td><td>✓</td><td></td><td></td><td>MIPS (LE) Linux with MUSL</td></tr>
 <tr><td><code>nvptx64-nvidia-cuda</code></td><td>✓</td><td></td><td></td><td>--emit=asm generates PTX code that <a href="https://github.com/japaric-archived/nvptx#targets">runs on NVIDIA GPUs</a></td></tr>
-<tr><td><code>powerpc-unknown-linux-gnu</code></td><td>✓</td><td>✓</td><td>✓</td><td>PowerPC Linux</td></tr>
-<tr><td><code>powerpc64-unknown-linux-gnu</code></td><td>✓</td><td>✓</td><td>✓</td><td>PPC64 Linux</td></tr>
-<tr><td><code>powerpc64le-unknown-linux-gnu</code></td><td>✓</td><td>✓</td><td>✓</td><td>PPC64LE Linux</td></tr>
+<tr><td><code>powerpc-unknown-linux-gnu</code></td><td>✓</td><td>✓</td><td>✓</td><td>PowerPC Linux (kernel 2.6.32, glibc 2.12)</td></tr>
+<tr><td><code>powerpc64-unknown-linux-gnu</code></td><td>✓</td><td>✓</td><td>✓</td><td>PPC64 Linux (kernel 2.6.32, glibc 2.12)</td></tr>
+<tr><td><code>powerpc64le-unknown-linux-gnu</code></td><td>✓</td><td>✓</td><td>✓</td><td>PPC64LE Linux (kernel 3.10, glibc 2.17)</td></tr>
 <tr><td><code>riscv32i-unknown-none-elf</code></td><td>*</td><td></td><td></td><td>Bare RISC-V (RV32I ISA)</td></tr>
 <tr><td><code>riscv32imac-unknown-none-elf</code></td><td>*</td><td></td><td></td><td>Bare RISC-V (RV32IMAC ISA)</td></tr>
 <tr><td><code>riscv32imc-unknown-none-elf</code></td><td>*</td><td></td><td></td><td>Bare RISC-V (RV32IMC ISA)</td></tr>
-<tr><td><code>riscv64gc-unknown-linux-gnu</code></td><td>✓</td><td>✓</td><td>✓</td><td>RISC-V Linux</td></tr>
+<tr><td><code>riscv64gc-unknown-linux-gnu</code></td><td>✓</td><td>✓</td><td>✓</td><td>RISC-V Linux (kernel 4.20, glibc 2.29)</td></tr>
 <tr><td><code>riscv64gc-unknown-none-elf</code></td><td>*</td><td></td><td></td><td>Bare RISC-V (RV64IMAFDC ISA)</td></tr>
 <tr><td><code>riscv64imac-unknown-none-elf</code></td><td>*</td><td></td><td></td><td>Bare RISC-V (RV64IMAC ISA)</td></tr>
-<tr><td><code>s390x-unknown-linux-gnu</code></td><td>✓</td><td>✓</td><td>✓</td><td>S390x Linux</td></tr>
-<tr><td><code>sparc64-unknown-linux-gnu</code></td><td>✓</td><td></td><td></td><td>SPARC Linux</td></tr>
+<tr><td><code>s390x-unknown-linux-gnu</code></td><td>✓</td><td>✓</td><td>✓</td><td>S390x Linux (kernel 2.6.32, glibc 2.12)</td></tr>
+<tr><td><code>sparc64-unknown-linux-gnu</code></td><td>✓</td><td></td><td></td><td>SPARC Linux (kernel 4.4, glibc 2.23)</td></tr>
 <tr><td><code>sparcv9-sun-solaris</code></td><td>✓</td><td></td><td></td><td>SPARC Solaris 10/11, illumos</td></tr>
 <tr><td><code>thumbv6m-none-eabi</code></td><td>*</td><td></td><td></td><td>Bare Cortex-M0, M0+, M1</td></tr>
 <tr><td><code>thumbv7em-none-eabi</code></td><td>*</td><td></td><td></td><td>Bare Cortex-M4, M7</td></tr>
 <tr><td><code>thumbv7em-none-eabihf</code></td><td>*</td><td></td><td></td><td>Bare Cortex-M4F, M7F, FPU, hardfloat</td></tr>
 <tr><td><code>thumbv7m-none-eabi</code></td><td>*</td><td></td><td></td><td>Bare Cortex-M3</td></tr>
 <tr><td><code>thumbv7neon-linux-androideabi</code></td><td>✓</td><td></td><td></td><td>Thumb2-mode ARMv7a Android with NEON</td></tr>
-<tr><td><code>thumbv7neon-unknown-linux-gnueabihf</code></td><td>✓</td><td></td><td></td><td>Thumb2-mode ARMv7a Linux with NEON</td></tr>
+<tr><td><code>thumbv7neon-unknown-linux-gnueabihf</code></td><td>✓</td><td></td><td></td><td>Thumb2-mode ARMv7a Linux with NEON (kernel 4.4, glibc 2.23)</td></tr>
 <tr><td><code>thumbv8m.base-none-eabi</code></td><td>*</td><td></td><td></td><td>ARMv8-M Baseline</td></tr>
 <tr><td><code>thumbv8m.main-none-eabi</code></td><td>*</td><td></td><td></td><td>ARMv8-M Mainline</td></tr>
 <tr><td><code>thumbv8m.main-none-eabihf</code></td><td>*</td><td></td><td></td><td>ARMv8-M Baseline, hardfloat</td></tr>
@@ -271,7 +271,7 @@ compiled, but for others <code>rustc</code> and <code>cargo</code> are too.</li>
 <tr><td><code>x86_64-sun-solaris</code></td><td>✓</td><td></td><td></td><td>64-bit Solaris 10/11, illumos</td></tr>
 <tr><td><code>x86_64-unknown-cloudabi</code></td><td>✓</td><td></td><td></td><td>64-bit CloudABI</td></tr>
 <tr><td><code>x86_64-unknown-freebsd</code></td><td>✓</td><td>✓</td><td>✓</td><td>64-bit FreeBSD</td></tr>
-<tr><td><code>x86_64-unknown-linux-gnux32</code></td><td>✓</td><td></td><td></td><td>64-bit Linux (x32 ABI)</td></tr>
+<tr><td><code>x86_64-unknown-linux-gnux32</code></td><td>✓</td><td></td><td></td><td>64-bit Linux (x32 ABI) (kernel 4.15, glibc 2.27)</td></tr>
 <tr><td><code>x86_64-unknown-linux-musl</code></td><td>✓</td><td>✓</td><td>✓</td><td>64-bit Linux with MUSL</td></tr>
 <tr><td><code>x86_64-unknown-netbsd</code></td><td>✓</td><td>✓</td><td>✓</td><td>NetBSD/amd64</td></tr>
 <tr><td><code>x86_64-unknown-redox</code></td><td>✓</td><td></td><td></td><td>Redox OS</td></tr>
