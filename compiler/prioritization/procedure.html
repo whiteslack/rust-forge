@@ -188,7 +188,6 @@ The working group focuses mainly on triaging <code>T-compiler</code> and <code>l
 <ul>
 <li>Add <code>T-compiler</code> and <code>libs-impl</code> to unlabelled T-compiler and libs-impl issues</li>
 <li>Assign priority to unprioritized issues with &quot;I-prioritize&quot; label</li>
-<li>Assign priority to regressions without a <code>P-*</code> label</li>
 <li>Process MCPs/FCPs</li>
 </ul>
 </li>
@@ -197,16 +196,20 @@ The working group focuses mainly on triaging <code>T-compiler</code> and <code>l
 <li>Run cli to generate agenda</li>
 <li>Fill agenda announcements</li>
 <li>Add performance logs</li>
-<li>Summarize stable/beta nominations</li>
-<li>Summarize PR's waiting on team</li>
-<li>Summarize <code>P-critical</code> and unassigned <code>P-high</code> regressions</li>
-<li>Summarize I-nominated issues</li>
 </ul>
 </li>
 <li><a href="#notify-the-team-about-the-meeting">Notify the team about the meeting</a>
 <ul>
 <li>Figure out which WGs need to check-in</li>
 <li>Notify @T-compiler/meeting about the meeting on Zulip</li>
+</ul>
+</li>
+<li><a href="#add-details-to-the-agenda">Add details to the Agenda</a>
+<ul>
+<li>Summarize stable/beta nominations</li>
+<li>Summarize PR's waiting on team</li>
+<li>Summarize <code>P-critical</code> and unassigned <code>P-high</code> regressions</li>
+<li>Summarize I-nominated issues</li>
 </ul>
 </li>
 <li><a href="#final-reviews">Final reviews</a>
@@ -221,9 +224,9 @@ The working group focuses mainly on triaging <code>T-compiler</code> and <code>l
 <h3><a class="header" href="#follow-ups-from-previous-meeting" id="follow-ups-from-previous-meeting">Follow ups from previous meeting</a></h3>
 <ul>
 <li>Remove <a href="https://github.com/rust-lang/rust/labels/I-nominated"><code>I-nominated</code></a> tags of already discussed issues. For that check previous week agenda and Zulip meeting</li>
-<li>Notify <a href="https://rust-lang.zulipchat.com/#narrow/pm-with/116083-user116083">@pnkfelix</a> about accepted <a href="https://github.com/rust-lang/rust/issues?q=is%3Aall+label%3Abeta-nominated+-label%3Abeta-accepted"><code>beta nominated</code></a> and <a href="https://github.com/rust-lang/rust/issues?q=is%3Aall+label%3Astable-nominated+-label%3Astable-accepted"><code>stable nominated</code></a> without <code>beta-accepted</code> and <code>stable-accepted</code> label</li>
-<li>Notify @pnkfelix about rejected <a href="https://github.com/rust-lang/rust/issues?q=is%3Aall+label%3Abeta-nominated+-label%3Abeta-accepted"><code>beta nominated</code></a> and <a href="https://github.com/rust-lang/rust/issues?q=is%3Aall+label%3Astable-nominated+-label%3Astable-accepted"><code>stable nominated</code></a> still with the nominated label</li>
-<li>Create an empty agenda using <a href="https://hackmd.io/WQW0yzDDS16YvtBNurmj6A">our template</a>, as soon as our Thursday's weekly meeting ends</li>
+<li>Notify <a href="https://rust-lang.zulipchat.com/#narrow/pm-with/116083-user116083">@pnkfelix</a> about accepted <a href="https://github.com/rust-lang/rust/issues?q=is%3Aall+label%3Abeta-nominated+-label%3Abeta-accepted"><code>beta nominated</code></a> and <a href="https://github.com/rust-lang/rust/issues?q=is%3Aall+label%3Astable-nominated+-label%3Astable-accepted"><code>stable nominated</code></a> without <code>beta-accepted</code> and <code>stable-accepted</code> label. For that compare these issues with list meeting's accepted nomations.</li>
+<li>Notify @pnkfelix about rejected <a href="https://github.com/rust-lang/rust/issues?q=is%3Aall+label%3Abeta-nominated+-label%3Abeta-accepted"><code>beta nominated</code></a> and <a href="https://github.com/rust-lang/rust/issues?q=is%3Aall+label%3Astable-nominated+-label%3Astable-accepted"><code>stable nominated</code></a> still with the nominated label. For that compare these issues with last meeting's rejected nominations.</li>
+<li>Create an empty agenda using <a href="https://hackmd.io/WQW0yzDDS16YvtBNurmj6A">our template</a>, as soon as our Thursday's weekly meeting ends. After creating the meeting change document permissions to Write -&gt; Owners.</li>
 </ul>
 <h3><a class="header" href="#prepare-agenda-content" id="prepare-agenda-content">Prepare agenda content</a></h3>
 <h4><a class="header" href="#add-t-compiler-and-libs-impl-labels" id="add-t-compiler-and-libs-impl-labels">Add <code>T-compiler</code> and <code>libs-impl</code> labels</a></h4>
@@ -242,11 +245,8 @@ The working group focuses mainly on triaging <code>T-compiler</code> and <code>l
 </blockquote>
 <p>The procedure here follows the <a href="#General-issues-review-process">General issues review process</a>.</p>
 <p>Note: triagebot automatically creates a topic and notify @<em>WG-prioritization</em> members once an issue is labelled with <code>I-prioritize</code>
-Note #2: These lists should typically be empty when we are close to the meeting.</p>
-<h4><a class="header" href="#assign-priority-to-regressions-without-a-p-label" id="assign-priority-to-regressions-without-a-p-label">Assign priority to regressions without a P-label</a></h4>
-<p>We should not have unprioritized regressions (<a href="https://github.com/rust-lang/rust/issues?q=is%3Aopen+label%3Aregression-from-stable-to-stable+-label%3AP-critical+-label%3AP-high+-label%3AP-medium+-label%3AP-low+-label%3AT-infra+-label%3AT-libs+-label%3AT-release+-label%3AT-rustdoc">stable</a>, <a href="https://github.com/rust-lang/rust/issues?q=is%3Aopen+label%3Aregression-from-stable-to-beta+-label%3AP-critical+-label%3AP-high+-label%3AP-medium+-label%3AP-low+-label%3AT-infra+-label%3AT-libs+-label%3AT-release+-label%3AT-rustdoc">beta</a> and <a href="https://github.com/rust-lang/rust/issues?q=is%3Aopen+label%3Aregression-from-stable-to-nightly+-label%3AP-critical+-label%3AP-high+-label%3AP-medium+-label%3AP-low+-label%3AT-infra+-label%3AT-libs+-label%3AT-release+-label%3AT-rustdoc">nightly</a>) and ideally regressions should have an assignee.</p>
-<p>The procedure here follows the <a href="#general-issues-review-process">General issues review process</a>.</p>
-<p>Note: triagebot automatically adds <code>I-prioritize</code> to all regression issues and creates a topic and notify @<em>WG-prioritization</em> members requesting prioritization.</p>
+Note #2: These lists should typically be empty when we are close to the meeting.
+Note #3: we should not have unprioritized regressions (<a href="https://github.com/rust-lang/rust/issues?q=is%3Aopen+label%3Aregression-from-stable-to-stable+-label%3AP-critical+-label%3AP-high+-label%3AP-medium+-label%3AP-low+-label%3AT-infra+-label%3AT-libs+-label%3AT-release+-label%3AT-rustdoc">stable</a>, <a href="https://github.com/rust-lang/rust/issues?q=is%3Aopen+label%3Aregression-from-stable-to-beta+-label%3AP-critical+-label%3AP-high+-label%3AP-medium+-label%3AP-low+-label%3AT-infra+-label%3AT-libs+-label%3AT-release+-label%3AT-rustdoc">beta</a> and <a href="https://github.com/rust-lang/rust/issues?q=is%3Aopen+label%3Aregression-from-stable-to-nightly+-label%3AP-critical+-label%3AP-high+-label%3AP-medium+-label%3AP-low+-label%3AT-infra+-label%3AT-libs+-label%3AT-release+-label%3AT-rustdoc">nightly</a>) and ideally regressions should have an assignee.</p>
 <h4><a class="header" href="#accept-mcps" id="accept-mcps">Accept MCPs</a></h4>
 <p>Accept all <a href="https://github.com/rust-lang/compiler-team/issues?q=is%3Aissue+is%3Aopen+label%3Amajor-change+label%3Afinal-comment-period">MCPs that have been on <code>final-comment-period</code></a> for 10 or more days. Basically check that <code>final-comment-period</code> label was added more than 10 days ago.
 To accept, remove <code>final-comment-period</code>, add <code>major-change-accepted</code> and close the issue.</p>
@@ -270,6 +270,19 @@ FCP = Final Comment Period</p>
 For now fix announcements output manually. Remove the nonsense no fcps kind of lines when there's content and remove old Finalized FCPs.</p>
 <h4><a class="header" href="#fill-agenda-announcements" id="fill-agenda-announcements">Fill agenda announcements</a></h4>
 <p>Check the compiler calendar to see if there's an outstanding event to announce and add it to the agenda.</p>
+<h4><a class="header" href="#add-performance-logs" id="add-performance-logs">Add performance logs</a></h4>
+<p>Add <a href="https://github.com/rust-lang/rustc-perf/tree/master/triage#triage-logs">Triage Logs</a> to the agenda.</p>
+<h3><a class="header" href="#notify-the-team-about-the-meeting" id="notify-the-team-about-the-meeting">Notify the team about the meeting</a></h3>
+<p><a href="https://rust-lang.github.io/compiler-team/about/triage-meeting/">Figure out which working groups' check-ins follow</a>.
+Create <code>[weekly meeting] YYYY-MM-DD #54818</code> topic in <code>#t-compiler/meetings</code> Zulip's stream and send the following messages:</p>
+<pre><code class="language-text">Hi @*T-compiler/meeting*; the triage meeting will happen tomorrow at 2pm UTC
+The @*WG-prioritization* have done pre-triage in #**t-compiler/wg-prioritization**
+@*WG-prioritization* have prepared the [meeting agenda](link_to_hackmd_agenda)
+We will have checkins from @*WG-X* and @*WG-Y*
+@**person1** do you have something you want to share about @*WG-X*?
+@**person2** do you have something you want to share about @*WG-Y*?
+</code></pre>
+<h3><a class="header" href="#add-details-to-the-agenda" id="add-details-to-the-agenda">Add details to the Agenda</a></h3>
 <h4><a class="header" href="#summarize-stablebeta-nominations" id="summarize-stablebeta-nominations">Summarize stable/beta nominations</a></h4>
 <ul>
 <li>Add them to the agenda explaining:
@@ -321,18 +334,6 @@ For now fix announcements output manually. Remove the nonsense no fcps kind of l
 </li>
 </ul>
 <p>Note: triagebot automatically creates a topic and notify @<em>WG-prioritization</em> members requesting addition to the agenda.</p>
-<h4><a class="header" href="#add-performance-logs" id="add-performance-logs">Add performance logs</a></h4>
-<p>Add <a href="https://github.com/rust-lang/rustc-perf/tree/master/triage#triage-logs">Triage Logs</a> to the agenda.</p>
-<h3><a class="header" href="#notify-the-team-about-the-meeting" id="notify-the-team-about-the-meeting">Notify the team about the meeting</a></h3>
-<p><a href="https://rust-lang.github.io/compiler-team/about/triage-meeting/">Figure out which working groups' check-ins follow</a>.
-Create <code>[weekly meeting] YYYY-MM-DD #54818</code> topic in <code>#t-compiler/meetings</code> Zulip's stream and send the following messages:</p>
-<pre><code class="language-text">Hi @*T-compiler/meeting*; the triage meeting will happen tomorrow at 2pm UTC
-The @*WG-prioritization* have done pre-triage in #**t-compiler/wg-prioritization**
-@*WG-prioritization* have prepared the [meeting agenda](link_to_hackmd_agenda)
-We will have checkins from @*WG-X* and @*WG-Y*
-@**person1** do you have something you want to share about @*WG-X*?
-@**person2** do you have something you want to share about @*WG-Y*?
-</code></pre>
 <h3><a class="header" href="#final-reviews" id="final-reviews">Final reviews</a></h3>
 <h4><a class="header" href="#check-toolstate" id="check-toolstate">Check toolstate</a></h4>
 <p>Check <a href="https://rust-lang-nursery.github.io/rust-toolstate/">toolstate</a> for tool breakage and notify teams in the corresponding channels.</p>
