@@ -188,15 +188,8 @@ our URL is then https://dev-static.rust-lang.org/dist/2015-09-17/index.html.</p>
 <p>If something goes wrong, and we rebuild stable artifacts, you'll need to
 invalidate the dev-static bucket for RCS to re-release it.</p>
 <ol>
-<li>Download https://dev-static.rust-lang.org/dist/channel-rust-1.35.0.toml The
-version number must be less than the current release, but otherwise doesn't
-matter.</li>
-<li>Rename the file locally to channel-rust-stable.toml</li>
-<li>Upload the file to the dev-static bucket into the dist folder, replacing
-channel-rust-stable.toml.</li>
-<li>Go to CloudFront in AWS, to the dev-static bucket, and issue an invalidation
-for &quot;/dist/channel-rust-stable.toml&quot;. This is necessary until
-https://github.com/rust-lang/rust-central-station/issues/49 is fixed.</li>
+<li>Obtain AWS credentials (i.e., <code>aws-creds.py</code> from <code>rust-lang/simpleinfra</code>).</li>
+<li>Run the <code>invalidate-dev-static-stable.sh</code> script in <code>rust-lang/simpleinfra</code>.</li>
 <li>(optional) login to central station, and run the following. This starts the
 dev-static promotion immediately, vs. waiting till the next hour.</li>
 </ol>
