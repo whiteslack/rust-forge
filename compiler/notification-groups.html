@@ -167,7 +167,7 @@ are setup so that anyone can join them if they want.</p>
 <p>If you'd like to create a notification group, here are the steps.
 First, you want to get approval from the compiler team:</p>
 <ul>
-<li>Propose the group by preparing a <a href="./mcp.html">Major Change Proposal</a>.  If
+<li>Propose the group by preparing a <a href="./mcp.html">Major Change Proposal</a>. If
 your group is not analogous to some existing group, it is probably
 a good idea to ping compiler team leads before-hand or as part of
 the MCP.</li>
@@ -176,20 +176,22 @@ notification group. Often this is an existing label, such as
 <code>O-Windows</code>.</li>
 </ul>
 <p>Once the MCP is accepted, here are the steps to actually create the group.
-In some cases we include an example PR from some other group. </p>
+In some cases we include an example PR from some other group.</p>
 <ul>
-<li>File a tracking issue in the rust-lang/compiler-team repository to collect
+<li>File a tracking issue in the <a href="https://github.com/rust-lang/compiler-team">rust-lang/compiler-team</a> repository to collect
 your progress.</li>
-<li>Create a PR against the rust-lang/team repository adding the notification
+<li>Create a PR against the <a href="https://github.com/rust-lang/team">rust-lang/team</a> repository adding the notification
 group. <a href="https://github.com/rust-lang/team/pull/347">Example PR.</a></li>
-<li>Configure the rust-lang/rust repository to accept triagebot commands
+<li>Configure the <a href="https://github.com/rust-lang/rust">rust-lang/rust</a> repository to accept triagebot commands
 for this group. <a href="https://github.com/rust-lang/rust/pull/72706">Example PR.</a></li>
 <li>Create a PR for the rustc-dev-guide amending <a href="https://rustc-dev-guide.rust-lang.org/notification-groups/about.html">the notification group
 section</a>
 to mention your group.</li>
-<li>Create a sample PR for the rust-lang/team repository showing how one can add
-oneself. This will be referenced by your blog post to show people how to 
+<li>Create a sample PR for the <a href="https://github.com/rust-lang/team">rust-lang/team</a> repository showing how one can add
+oneself. This will be referenced by your blog post to show people how to
 join. <a href="https://github.com/rust-lang/team/pull/140">Example PR.</a></li>
+<li>Create a Zulip stream for the notification group. If you don't have the permission
+to do, you can ask on <a href="https://rust-lang.zulipchat.com/#narrow/stream/185694-t-compiler.2Fwg-meta">#t-compiler/wg-meta</a>.</li>
 <li>Write an announcement blog post for Inside Rust and open a PR against
 <a href="https://github.com/rust-lang/blog.rust-lang.org">blog.rust-lang.org</a>.
 <a href="https://github.com/rust-lang/blog.rust-lang.org/pull/615">Example PR.</a></li>
