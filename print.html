@@ -1350,9 +1350,11 @@ We will have checkins from @*WG-X* and @*WG-Y*
 <ul>
 <li>Add them to the agenda explaining:
 <ul>
-<li>Why was it nominated</li>
+<li>Who the author of the PR is</li>
 <li>Who the assignee is</li>
-<li>Add important details</li>
+<li>Which issue fixes, it is a regression? what's the priority?</li>
+<li>Why was it nominated</li>
+<li>Add other important details</li>
 </ul>
 </li>
 </ul>
@@ -1364,8 +1366,10 @@ We will have checkins from @*WG-X* and @*WG-Y*
 <ul>
 <li>Add them to the agenda explaining:
 <ul>
-<li>What are they waiting for</li>
-<li>Add important details</li>
+<li>Who the author of the PR is</li>
+<li>Who the assignee is</li>
+<li>What is the issue waiting for</li>
+<li>Add other important details</li>
 </ul>
 </li>
 <li>Explicitly nominate any issue that can be <em>quickly</em> resolved in a triage meeting.</li>
@@ -1375,9 +1379,25 @@ We will have checkins from @*WG-X* and @*WG-Y*
 <p>Try to follow the <a href="compiler/prioritization/procedure.html#general-issues-review-process">General issues review process</a>.</p>
 <p>We should:</p>
 <ul>
-<li><a href="https://rustc-dev-guide.rust-lang.org/notification-groups/about.html">Notify the appropriate groups</a></li>
-<li>Push them forward, if possible</li>
-<li>Assign if possible; if the issue remains unassigned, it should be added to the agenda so we can assign it during the meeting</li>
+<li>
+<p><a href="https://rustc-dev-guide.rust-lang.org/notification-groups/about.html">Notify the appropriate groups</a></p>
+</li>
+<li>
+<p>Push them forward, if possible</p>
+</li>
+<li>
+<p>Assign if possible</p>
+</li>
+<li>
+<p>Add <code>P-critical</code>s and unassigned <code>P-high</code>s to the agenda explaining:</p>
+<ul>
+<li>If it's assigned or not and to whom</li>
+<li>Does it needs MCVE and/or bisection?</li>
+<li>Are there identified culprits?</li>
+<li>Do already have a PR open that fixes the issue?</li>
+<li>Add other important details</li>
+</ul>
+</li>
 </ul>
 <p>Note: triagebot automatically creates a topic and notify @<em>WG-prioritization</em> members requesting addition to the agenda.</p>
 <h4><a class="header" href="#summarize-i-nominated-issues" id="summarize-i-nominated-issues">Summarize I-nominated issues</a></h4>
@@ -1389,10 +1409,10 @@ We will have checkins from @*WG-X* and @*WG-Y*
 <li>Check if each issue is worth being discussed</li>
 <li>Add them to the agenda explaining:
 <ul>
-<li>Why was it nominated</li>
 <li>Who the assignee is</li>
 <li>Is this an issue or a PR: if an issue, does it have a PR that fixes it?</li>
-<li>Add important details</li>
+<li>Why was it nominated</li>
+<li>Add other important details</li>
 </ul>
 </li>
 </ul>
