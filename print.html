@@ -3409,7 +3409,7 @@ the user and apply the configuration.</p>
 <ul>
 <li>FQDN: <code>bastion.infra.rust-lang.org</code></li>
 <li><a href="https://github.com/rust-lang/simpleinfra/blob/master/ansible/playbooks/bastion.yml">Ansible playbook</a> to deploy this server.</li>
-<li><a href="https://github.com/rust-lang/simpleinfra/tree/master/terraform/services/bastion">Terraform configuration</a> to create AWS resources.</li>
+<li><a href="https://github.com/rust-lang/simpleinfra/tree/master/terraform/bastion">Terraform configuration</a> to create AWS resources.</li>
 <li><a href="https://grafana.rust-lang.org/d/rpXrFfKWz/instance-metrics?orgId=1&amp;var-instance=bastion.infra.rust-lang.org:9100">Instance metrics</a> (only available to infra team members).</li>
 </ul>
 <h2><a class="header" href="#logging-into-servers-through-the-bastion" id="logging-into-servers-through-the-bastion">Logging into servers through the bastion</a></h2>
@@ -3451,9 +3451,9 @@ replacing <code>USERNAME</code> and <code>IP_ADDRESS</code> with the proper valu
 <pre><code>aws ssm put-parameter --type String --name &quot;/prod/bastion/allowed-ips/USERNAME&quot; --value &quot;IP_ADDRESS/32&quot;
 </code></pre>
 <p>You'll also need to add the username to the list in
-<a href="https://github.com/rust-lang/simpleinfra/blob/master/terraform/services.tf"><code>terraform/services.tf</code></a> (key <code>allowed_users</code> in the
-<code>service_bastion</code> module). Once you made all the needed changes you wanted you
-need to <a href="https://github.com/rust-lang/simpleinfra/tree/master/terraform#applying-the-configuration">apply the Terraform configuration</a>.</p>
+<a href="https://github.com/rust-lang/simpleinfra/blob/master/terraform/bastion/firewall.tf"><code>terraform/bastion/firewall.tf</code></a> (local variable
+<code>allowed_users</code>). Once you made all the needed changes you wanted you need to
+<a href="https://github.com/rust-lang/simpleinfra/tree/master/terraform#applying-the-configuration">apply the Terraform configuration</a>.</p>
 <h3><a class="header" href="#updating-a-whitelisted-ip" id="updating-a-whitelisted-ip">Updating a whitelisted IP</a></h3>
 <p>Due to privacy reasons, all the static IP addresses of team members with access
 to the bastion are stored on <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html">AWS SSM Parameter Store</a> instead of public
@@ -3471,9 +3471,9 @@ of replacing <code>USERNAME</code> with the proper value):</p>
 <pre><code>aws ssm delete-parameter --name &quot;/prod/bastion/allowed-ips/USERNAME&quot;
 </code></pre>
 <p>You'll also need to remove the username from the list in
-<a href="https://github.com/rust-lang/simpleinfra/blob/master/terraform/services.tf"><code>terraform/services.tf</code></a> (key <code>allowed_users</code> in the
-<code>service_bastion</code> module). Once you made all the needed changes you wanted you
-need to <a href="https://github.com/rust-lang/simpleinfra/tree/master/terraform#applying-the-configuration">apply the Terraform configuration</a>.</p>
+<a href="https://github.com/rust-lang/simpleinfra/blob/master/terraform/bastion/firewall.tf"><code>terraform/bastion/firewall.tf</code></a> (local variable
+<code>allowed_users</code>). Once you made all the needed changes you wanted you need to
+<a href="https://github.com/rust-lang/simpleinfra/tree/master/terraform#applying-the-configuration">apply the Terraform configuration</a>.</p>
 <h1><a class="header" href="#crater-agents" id="crater-agents">Crater agents</a></h1>
 <ul>
 <li>Source code: <a href="https://github.com/rust-lang/docs.rs">rust-lang/crater</a></li>
