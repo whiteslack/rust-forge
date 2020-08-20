@@ -4238,16 +4238,20 @@ with a file name like <code>YYYY-MM-DD.md</code></li>
 <p>Unsafe code blocks in the standard library need a comment explaining why they're <a href="https://doc.rust-lang.org/nomicon">ok</a>. There's a <code>tidy</code> lint that checks this. The unsafe code also needs to actually be ok.</p>
 <p>The rules around what's sound and what's not can be subtle. See the <a href="https://github.com/rust-lang/unsafe-code-guidelines">Unsafe Code Guidelines WG</a> for current thinking, and consider pinging <code>@rust-lang/libs</code>, <code>@rust-lang/lang</code>, and/or somebody from the WG if you're in <em>any</em> doubt. We love debating the soundness of unsafe code, and the more eyes on it the better!</p>
 <h3><a class="header" href="#is-that-inline-right" id="is-that-inline-right">Is that <code>#[inline]</code> right?</a></h3>
-<p>Inlining is a trade-off between potential execution speed, compile time and code size.</p>
-<p>You should add <code>#[inline]</code>:</p>
+<p>Inlining is a trade-off between potential execution speed, compile time and code size. There's some discussion about it in <a href="https://github.com/rust-lang/hashbrown/pull/119">this PR to the <code>hashbrown</code> crate</a>. From the thread:</p>
+<blockquote>
+<p><code>#[inline]</code> is very different than simply just an inline hint. As I mentioned before, there's no equivalent in C++ for what <code>#[inline]</code> does. In debug mode rustc basically ignores <code>#[inline]</code>, pretending you didn't even write it. In release mode the compiler will, by default, codegen an <code>#[inline]</code> function into every single referencing codegen unit, and then it will also add <code>inlinehin</code>t. This means that if you have 16 CGUs and they all reference an item, every single one is getting the entire item's implementation inlined into it.</p>
+</blockquote>
+<p>You can add <code>#[inline]</code>:</p>
 <ul>
 <li>To public, small, non-generic functions.</li>
 </ul>
-<p>You shouldn’t need <code>#[inline]</code>:</p>
+<p>You shouldn't need <code>#[inline]</code>:</p>
 <ul>
 <li>On methods that have any generics in scope.</li>
-<li>On methods on traits that don’t have a default implementation.</li>
+<li>On methods on traits that don't have a default implementation.</li>
 </ul>
+<p><code>#[inline]</code> can always be introduced later, so if you're in doubt they can just be removed.</p>
 <h4><a class="header" href="#what-about-inlinealways" id="what-about-inlinealways">What about <code>#[inline(always)]</code>?</a></h4>
 <p>You should just about never need <code>#[inline(always)]</code>. It may be beneficial for private helper methods that are used in a limited number of places or for trivial operators. A micro benchmark should justify the attribute.</p>
 <h3><a class="header" href="#is-there-any-potential-breakage" id="is-there-any-potential-breakage">Is there any potential breakage?</a></h3>
@@ -4261,6 +4265,8 @@ with a file name like <code>YYYY-MM-DD.md</code></li>
 <ul>
 <li>Looping in maintainers of broken crates and submitting PRs to fix them.</li>
 </ul>
+<h3><a class="header" href="#is-behavior-changed" id="is-behavior-changed">Is behavior changed?</a></h3>
+<p>Breaking changes aren't just limited to compilation failures. Behavioral changes to stable functions generally can't be accepted. See <a href="https://github.com/rust-lang/rust/pull/46799">the <code>home_dir</code> issue</a> for an example.</p>
 <h3><a class="header" href="#are-there-new-impls-for-stable-traits" id="are-there-new-impls-for-stable-traits">Are there new impls for stable traits?</a></h3>
 <p>A lot of PRs to the standard library are adding new impls for already stable traits, which can break consumers in many weird and wonderful ways. The following sections gives some examples of breakage from new trait impls that may not be obvious just from the change made to the standard library.</p>
 <h4><a class="header" href="#inference-breaks-when-a-second-generic-impl-is-introduced" id="inference-breaks-when-a-second-generic-impl-is-introduced">Inference breaks when a second generic impl is introduced</a></h4>
@@ -4343,6 +4349,8 @@ let c = a + &amp;b;
 <p>Public enums should have a <code>#[non_exhaustive]</code> attribute if there's any possibility of new variants being introduced, so that they can be added without causing breakage.</p>
 <h3><a class="header" href="#does-this-change-drop-order" id="does-this-change-drop-order">Does this change drop order?</a></h3>
 <p>Changes to collection internals may affect the order their items are dropped in. This has been accepted in the past, but should be noted.</p>
+<h3><a class="header" href="#is-there-a-manual-drop-implementation" id="is-there-a-manual-drop-implementation">Is there a manual <code>Drop</code> implementation?</a></h3>
+<p>Generic types that manually implement <code>Drop</code> should consider whether a <code>#[may_dangle]</code> attribute is appropriate. The <a href="https://doc.rust-lang.org/nomicon/dropck.html">Nomicon</a> has some details on what <code>#[may_dangle]</code> is all about.</p>
 <h3><a class="header" href="#how-could-mem-break-assumptions" id="how-could-mem-break-assumptions">How could <code>mem</code> break assumptions?</a></h3>
 <h4><a class="header" href="#memreplace-and-memswap" id="memreplace-and-memswap"><code>mem::replace</code> and <code>mem::swap</code></a></h4>
 <p>Any value behind a <code>&amp;mut</code> reference can be replaced with a new one using <code>mem::replace</code> or <code>mem::swap</code>, so code shouldn't assume any reachable mutable references can't have their internals changed by replacing.</p>
