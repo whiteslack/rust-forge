@@ -320,7 +320,7 @@ let c = a + &amp;b;
 <p>PRs to <a href="https://github.com/rust-lang/rust"><code>rust-lang/rust</code></a> aren’t merged manually using GitHub’s UI or by pushing remote branches. Everything goes through <a href="https://github.com/rust-lang/homu"><code>bors</code></a>.</p>
 <h3><a class="header" href="#when-to-rollup" id="when-to-rollup">When to <code>rollup</code></a></h3>
 <p>For Libs PRs, rolling up is usually fine, in particular if it's only a new unstable addition or if it only touches docs (with the exception of intra doc links which complicates things while the feature has bugs...).</p>
-<p>If a submodule is affected then probably don't <code>rollup</code>. If the feature affects perf then also avoid <code>rollup</code> -- mark it as <code>rollup=never</code>.</p>
+<p>See the <a href="../compiler/reviews.html#rollups">rollup guidelines</a> for more details on when to rollup.</p>
 <h3><a class="header" href="#when-theres-new-public-items" id="when-theres-new-public-items">When there’s new public items</a></h3>
 <p>If the feature is new, then a tracking issue should be opened for it. Have a look at some previous <a href="https://github.com/rust-lang/rust/issues?q=label%3AC-tracking-issue+label%3AT-libs">tracking issues</a> to get an idea of what needs to go in there. The <code>issue</code> field on <code>#[unstable]</code> attributes should be updated with the tracking issue number.</p>
 <p>Unstable features can be merged as normal through <a href="https://github.com/rust-lang/homu"><code>bors</code></a> once they look ready.</p>

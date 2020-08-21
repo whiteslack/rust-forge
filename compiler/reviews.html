@@ -166,7 +166,7 @@
                         <h1><a class="header" href="#review-policies" id="review-policies">Review policies</a></h1>
 <p>Every PR that lands in the compiler and its associated crates must be
 reviewed by at least one person who is knowledgeable with the code in
-question. </p>
+question.</p>
 <p>When a PR is opened, you can request a reviewer by including <code>r? @username</code> in the PR description. If you don't do so, the highfive bot
 will automatically assign someone.</p>
 <p>It is common to leave a <code>r? @username</code> comment at some later point to
@@ -182,10 +182,105 @@ command. This indicates that the PR was already approved by
 <p>Finally, in some cases, PRs can be &quot;delegated&quot; by writing <code>@bors delegate+</code> or <code>@bors delegate=username</code>. This will allow the PR author
 to approve the PR by issuing <code>@bors</code> commands like the ones above
 (but this privilege is limited to the single PR).</p>
-<h2><a class="header" href="#high-priority-issues" id="high-priority-issues">High priority issues</a></h2>
-<p>When merging high priority issues (<code>P-critical</code> and <code>P-high</code>) it's
-recommended to avoid rollups and bump a bit the priority of the PR in
-the homu queue by issuing <code>@bors r+ rollup=never p=1</code>.</p>
+<h2><a class="header" href="#rollups" id="rollups">Rollups</a></h2>
+<p>All reviewers are strongly encouraged to explicitly mark a PR as to whether or
+not it should be part of a <a href="../release/rollups.html">rollup</a> with one of the following:</p>
+<ul>
+<li><code>rollup=always</code>: These PRs are very unlikely to break tests or have performance
+implications. Example scenarios:
+<ul>
+<li>Changes are limited to documentation, comments, etc. that is highly
+unlikely to fail a build.</li>
+<li>Changes cannot have performance implications.</li>
+<li>Your PR is not landing possibly-breaking or behavior altering changes.
+<ul>
+<li>Feature stabilization without other changes is likely fine to
+rollup, though.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>rollup=maybe</code>: This is the <strong>default</strong> if you do not specify a rollup
+status. Use this if you don't have much confidence that it won't break
+tests. This can be used if you aren't sure if it should be one of the other
+categories. Since this is the default, there is usually no need to
+explicitly specify this, unless you are un-marking the rollup level from a
+previous command.</li>
+<li><code>rollup=iffy</code>: Use this for mildly risky PRs (more risky than &quot;maybe&quot;).
+Example scenarios:
+<ul>
+<li>The PR is large and non-additive (note: adding 2000 lines of completely
+new tests is fine to rollup).</li>
+<li>Messes too much with:
+<ul>
+<li>LLVM or code generation</li>
+<li>bootstrap or the build system</li>
+<li>build-manifest</li>
+</ul>
+</li>
+<li>Has platform-specific changes that are not checked by the normal PR checks.</li>
+<li>May be affected by MIR migrate mode.</li>
+</ul>
+</li>
+<li><code>rollup=never</code>: This should <em>never</em> be included in a rollup (<strong>please</strong>
+include a comment explaining why you have chosen this). Example scenarios:
+<ul>
+<li>May have performance implications.</li>
+<li>May cause unclear regressions (we would likely want to bisect to this PR
+specifically, as it would be hard to identify as the cause from a
+rollup).</li>
+<li>Has a high chance of failure.</li>
+<li>Is otherwise dangerous to rollup.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>Note</strong>:<br />
+<code>@bors rollup</code> is equivalent to <code>@bors rollup=always</code><br />
+<code>@bors rollup-</code> is equivalent to <code>@bors rollup=never</code></p>
+</blockquote>
+<h2><a class="header" href="#priority" id="priority">Priority</a></h2>
+<p>Reviewers are encouraged to set one of the rollup statuses listed above
+instead of setting priority. Bors automatically sorts based on the rollup
+status (never is the highest priority, always is the lowest), and also by PR
+age. If you do change the priority, please use your best judgment to balance
+fairness with other PRs.</p>
+<p>The following is some guidance for setting priorities:</p>
+<ul>
+<li>1-5
+<ul>
+<li>P-high issue fixes</li>
+<li>Toolstate fixes</li>
+<li>Beta-nominated PRs</li>
+<li>Submodule updates</li>
+</ul>
+</li>
+<li>5+
+<ul>
+<li>P-critical issue fixes</li>
+</ul>
+</li>
+<li>10+
+<ul>
+<li>Bitrot-prone PRs (particularly very large ones that touch many files)</li>
+<li>Urgent PRs</li>
+<li>Beta backports</li>
+</ul>
+</li>
+<li>20+
+<ul>
+<li>High priority that needs to jump ahead of any rollups</li>
+<li>Fixes or changes something that has a high risk of being re-broken by
+another PR in the queue.</li>
+</ul>
+</li>
+<li>1000
+<ul>
+<li>Absolutely critical fixes</li>
+<li>Release promotions</li>
+</ul>
+</li>
+</ul>
 <h2><a class="header" href="#expectations-for-r" id="expectations-for-r">Expectations for r+</a></h2>
 <p>bors privileges are binary: the bot doesn't know which code you are
 familiar with and what code you are not. They must therefore be used
