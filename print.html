@@ -4534,7 +4534,38 @@ let c = a + &amp;b;
 <h3><a class="header" href="#does-this-change-drop-order" id="does-this-change-drop-order">Does this change drop order?</a></h3>
 <p>Changes to collection internals may affect the order their items are dropped in. This has been accepted in the past, but should be noted.</p>
 <h3><a class="header" href="#is-there-a-manual-drop-implementation" id="is-there-a-manual-drop-implementation">Is there a manual <code>Drop</code> implementation?</a></h3>
-<p>Generic types that manually implement <code>Drop</code> should consider whether a <code>#[may_dangle]</code> attribute is appropriate. The <a href="https://doc.rust-lang.org/nomicon/dropck.html">Nomicon</a> has some details on what <code>#[may_dangle]</code> is all about.</p>
+<p>A generic <code>Type&lt;T&gt;</code> that manually implements <code>Drop</code> should consider whether a <code>#[may_dangle]</code> attribute is appropriate on <code>T</code>. The <a href="https://doc.rust-lang.org/nomicon/dropck.html">Nomicon</a> has some details on what <code>#[may_dangle]</code> is all about.</p>
+<p>If a generic <code>Type&lt;T&gt;</code> has a manual drop implementation that may also involve dropping <code>T</code> then dropck needs to know about it. If <code>Type&lt;T&gt;</code>'s ownership of <code>T</code> is expressed through types that don't drop <code>T</code> themselves such as <code>ManuallyDrop&lt;T&gt;</code>, <code>*mut T</code>, or <code>MaybeUninit&lt;T&gt;</code> then <code>Type&lt;T&gt;</code> also <a href="https://github.com/rust-lang/rfcs/blob/master/text/0769-sound-generic-drop.md#phantom-data">needs a <code>PhantomData&lt;T&gt;</code> field</a> to tell dropck that <code>T</code> may be dropped. Types in the standard library that use the internal <code>Unique&lt;T&gt;</code> pointer type don't need a <code>PhantomData&lt;T&gt;</code> marker field. That's taken care of for them by <code>Unique&lt;T&gt;</code>.</p>
+<p>As a real-world example of where this can go wrong, consider an <code>OptionCell&lt;T&gt;</code> that looks something like this:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct OptionCell&lt;T&gt; {
+    is_init: bool,
+    value: MaybeUninit&lt;T&gt;,
+}
+
+impl&lt;T&gt; Drop for OptionCell&lt;T&gt; {
+    fn drop(&amp;mut self) {
+        if self.is_init {
+            // Safety: `value` is guaranteed to be fully initialized when `is_init` is true.
+            // Safety: The cell is being dropped, so it can't be accessed again.
+            drop(unsafe { self.value.read() });
+        }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Adding a <code>#[may_dangle]</code> attribute to this <code>OptionCell&lt;T&gt;</code> that didn't have a <code>PhantomData&lt;T&gt;</code> marker field opened up <a href="https://github.com/rust-lang/rust/issues/76367">a soundness hole</a> for <code>T</code>'s that didn't strictly outlive the <code>OptionCell&lt;T&gt;</code>, and so could be accessed after being dropped in their own <code>Drop</code> implementations. The correct application of <code>#[may_dangle]</code> also required a <code>PhantomData&lt;T&gt;</code> field:</p>
+<pre><code class="language-diff">struct OptionCell&lt;T&gt; {
+    is_init: bool,
+    value: MaybeUninit&lt;T&gt;,
++   _marker: PhantomData&lt;T&gt;,
+}
+
+- impl&lt;T&gt; Drop for OptionCell&lt;T&gt; {
++ unsafe impl&lt;#[may_dangle] T&gt; Drop for OptionCell&lt;T&gt; {
+</code></pre>
 <h3><a class="header" href="#how-could-mem-break-assumptions" id="how-could-mem-break-assumptions">How could <code>mem</code> break assumptions?</a></h3>
 <h4><a class="header" href="#memreplace-and-memswap" id="memreplace-and-memswap"><code>mem::replace</code> and <code>mem::swap</code></a></h4>
 <p>Any value behind a <code>&amp;mut</code> reference can be replaced with a new one using <code>mem::replace</code> or <code>mem::swap</code>, so code shouldn't assume any reachable mutable references can't have their internals changed by replacing.</p>
