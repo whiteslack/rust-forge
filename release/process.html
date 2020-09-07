@@ -165,6 +165,12 @@
                     <main>
                         <h1><a class="header" href="#the-rust-release-process" id="the-rust-release-process">The Rust Release Process</a></h1>
 <p>Here's how Rust is currently released:</p>
+<h2><a class="header" href="#promote-beta-to-stable-t-6-days-friday-the-week-before" id="promote-beta-to-stable-t-6-days-friday-the-week-before">Promote beta to stable (T-6 days, Friday the week before)</a></h2>
+<p>Open a PR bumping the version number in <code>src/bootstrap/channel.rs</code>. r+
+rollup=never this PR.</p>
+<p>Mark it as rollup=never, because if it lands in a rollup as <em>not</em> the first PR
+then other pull requests in that rollup will be incorrectly associated with the
+prior release.</p>
 <h2><a class="header" href="#promote-beta-to-stable-t-3-days-monday" id="promote-beta-to-stable-t-3-days-monday">Promote beta to stable (T-3 days, Monday)</a></h2>
 <p>Promote beta to stable. Temporarily turn off GitHub branch protection for the
 <code>stable</code> branch in rust-lang/rust repo. In your local Rust repo:</p>
@@ -200,25 +206,28 @@ dev-static promotion immediately, vs. waiting till the next hour.</li>
 <pre><code class="language-bash">docker exec -d -it rcs bash -c 'promote-release /tmp/stable stable /data/secrets-dev.toml 2&gt;&amp;1 | logger --tag release-stable'
 </code></pre>
 <h2><a class="header" href="#promote-master-to-beta-t-2-days-tuesday" id="promote-master-to-beta-t-2-days-tuesday">Promote master to beta (T-2 days, Tuesday)</a></h2>
+<p>We need to find out the parent commit in which the PR opened last Monday merged.</p>
+<p>Go to that PR, and find the &quot;bors merged commit $SHA into rust-lang:master at the bottom.</p>
+<p>Locally, run <code>export BRANCH_POINT=</code>git rev-parse $SHA^` in the rust-lang/rust
+checkout. This should be bors-authored merge into master of the PR before the
+version bump merged.</p>
 <p>Create a new branch on <code>rust-lang/cargo</code> for the new beta. Here, <code>rust-lang</code> is
 the remote for https://github.com/rust-lang/rust.git. Replace <code>YY</code> with the
 minor version of master. First determine the branch point for cargo in
 <code>rust-lang/rust</code>, and then create a new branch:</p>
 <pre><code class="language-sh">$ cd rust
 $ git fetch rust-lang
-$ CARGO_SHA=`git rev-parse rust-lang/master:src/tools/cargo`
+$ CARGO_SHA=`git rev-parse $BRANCH_POINT:src/tools/cargo`
 $ cd src/tools/cargo
 $ git branch rust-1.YY.0 $CARGO_SHA
 $ git push origin rust-1.YY.0
 </code></pre>
 <p>You'll need to temporarily disable branch protection on GitHub to push the new
 branch.</p>
-<p>In theory one day we'll do the same for rust-lang/rls, but for now we haven't
-done this yet.</p>
 <p>Temporarily disable banch protection on GitHub for the <code>beta</code> branch of the Rust
 repo. Promote rust-lang/rust's master branch to beta as with yesterday:</p>
 <pre><code class="language-sh">$ git fetch rust-lang
-$ git push rust-lang rust-lang/master:beta -f
+$ git push rust-lang $BRANCH_POINT:beta -f
 </code></pre>
 <p>Re-enable branch protection on GitHub. Send a PR to the freshly created beta
 branch of rust-lang/rust which:</p>
@@ -236,16 +245,12 @@ build was uploaded</li>
 </li>
 <li>Update src/ci/run.sh to pass &quot;--release-channel=beta&quot;.</li>
 </ul>
-<p>Note that you probably don't want to update the RLS if it's working, but if it's
-not working beta won't land and it'll need to get updated. After this PR merges
-(through @bors) the beta should be automatically released.</p>
 <h2><a class="header" href="#master-bootstrap-update-t-1-day-wednesday" id="master-bootstrap-update-t-1-day-wednesday">Master bootstrap update (T-1 day, Wednesday)</a></h2>
-<p>Write a new blog post, update rust-www, and update rust-forge. Submit PRs for
-tomorrow.</p>
 <p>Send a PR to the master branch to:</p>
 <ul>
 <li>modify src/stage0.txt to bootstrap from yesterday's beta</li>
-<li>modify src/bootstrap/channel.rs with the new version number</li>
+<li>Remove <code>cfg(stage0)</code> annotated items</li>
+<li>Replace <code>cfg(not(stage0))</code> with nothing</li>
 </ul>
 <h2><a class="header" href="#release-day-thursday" id="release-day-thursday">Release day (Thursday)</a></h2>
 <p>Decide on a time to do the release, T.</p>
@@ -293,13 +298,6 @@ update the date to download from (modifying <code>src/stage0.txt</code>).</p>
 </li>
 </ul>
 <p>Bask in your success.</p>
-<h2><a class="header" href="#update-dependencies-t1-day-friday" id="update-dependencies-t1-day-friday">Update dependencies (T+1 day, Friday)</a></h2>
-<p>In the repo:</p>
-<pre><code class="language-bash">$ cd src
-$ cargo update
-</code></pre>
-<p>The very ambitious can use https://crates.io/crates/cargo-outdated and update
-through breaking changes.</p>
 <h2><a class="header" href="#publishing-a-nightly-based-off-a-try-build" id="publishing-a-nightly-based-off-a-try-build">Publishing a nightly based off a try build</a></h2>
 <p>Sometimes a PR requires testing how it behaves when downloaded from rustup, for
 example after a manifest change. In those cases it's possible to publish a new
