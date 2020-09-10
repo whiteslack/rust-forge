@@ -208,7 +208,7 @@ dev-static promotion immediately, vs. waiting till the next hour.</li>
 <h2><a class="header" href="#promote-master-to-beta-t-2-days-tuesday" id="promote-master-to-beta-t-2-days-tuesday">Promote master to beta (T-2 days, Tuesday)</a></h2>
 <p>We need to find out the parent commit in which the PR opened last Monday merged.</p>
 <p>Go to that PR, and find the &quot;bors merged commit $SHA into rust-lang:master at the bottom.</p>
-<p>Locally, run <code>export BRANCH_POINT=</code>git rev-parse $SHA^` in the rust-lang/rust
+<p>Locally, run <code>export BRANCH_POINT=`git rev-parse $SHA^`</code> in the rust-lang/rust
 checkout. This should be bors-authored merge into master of the PR before the
 version bump merged.</p>
 <p>Create a new branch on <code>rust-lang/cargo</code> for the new beta. Here, <code>rust-lang</code> is
