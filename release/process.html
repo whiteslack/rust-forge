@@ -165,12 +165,12 @@
                     <main>
                         <h1><a class="header" href="#the-rust-release-process" id="the-rust-release-process">The Rust Release Process</a></h1>
 <p>Here's how Rust is currently released:</p>
-<h2><a class="header" href="#promote-beta-to-stable-t-6-days-friday-the-week-before" id="promote-beta-to-stable-t-6-days-friday-the-week-before">Promote beta to stable (T-6 days, Friday the week before)</a></h2>
-<p>Open a PR bumping the version number in <code>src/bootstrap/channel.rs</code>. r+
-rollup=never this PR.</p>
-<p>Mark it as rollup=never, because if it lands in a rollup as <em>not</em> the first PR
-then other pull requests in that rollup will be incorrectly associated with the
-prior release.</p>
+<h2><a class="header" href="#bump-the-stable-version-number-t-6-days-friday-the-week-before" id="bump-the-stable-version-number-t-6-days-friday-the-week-before">Bump the stable version number (T-6 days, Friday the week before)</a></h2>
+<p>Open a PR bumping the version number in <code>src/version</code>. <code>r+ rollup=never</code> this
+PR.</p>
+<p>Mark it as <code>rollup=never</code>, because if it lands in a rollup as <em>not</em> the first
+PR then other pull requests in that rollup will be incorrectly associated with
+the prior release.</p>
 <h2><a class="header" href="#promote-beta-to-stable-t-3-days-monday" id="promote-beta-to-stable-t-3-days-monday">Promote beta to stable (T-3 days, Monday)</a></h2>
 <p>Promote beta to stable. Temporarily turn off GitHub branch protection for the
 <code>stable</code> branch in rust-lang/rust repo. In your local Rust repo:</p>
