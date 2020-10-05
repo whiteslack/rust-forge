@@ -183,20 +183,24 @@
 <p>You can drop your claim to the issue via <code>@rustbot release-assignment</code>; Rust team members can do the same if they want to release someone else's assignment.</p>
 <p><code>@rustbot assign @user</code> can be used only by Rust team members and will assign that user to the issue (with same rules as before -- either directly or indirectly).</p>
 <p>Soon (when the &quot;highfive&quot; bot migration will be complete, see <a href="https://github.com/rust-lang/highfive/pull/258">rust-lang/highfive#258</a>), <code>r?</code> will also assign reviewers to PRs, though unlike issues, non-team members cannot be assigned. Anyone can invoke the command.</p>
-<p>To enable on a repository, add the following to a triagebot.toml file in the repository root.</p>
+<p>To enable on a repository, add the following to a <code>triagebot.toml</code> file in the repository root.</p>
 <pre><code class="language-toml">[assign]
 </code></pre>
 <h2><a class="header" href="#issue-notifications" id="issue-notifications">Issue notifications</a></h2>
 <p>Each registered team member has a notifications page at:</p>
 <p><code>https://triage.rust-lang.org/notifications?user=&lt;github-username&gt;</code></p>
 <p>This page is populated from direct mentions (@user) and team mentions (@rust-lang/libs) across the rust-lang organization.</p>
-<p>It can also be edited via Zulip by <a href="https://rust-lang.zulipchat.com/#narrow/pm-with/261224-triage-rust-lang-bot">private-messaging triagebot</a>. Any Rust organization member can edit their notifications page, or pages of other Rust organization team members. To do so, the editor must have a <code>zulip-id</code> listed in their people/username.toml file in the <a href="https://github.com/rust-lang/team/">team repository</a>. The bot will tell you which ID to use when talking to it for the first time; please <code>r? @Mark-Simulacrum</code> on PRs adding Zulip IDs.</p>
+<p>It can also be edited via Zulip by <a href="https://rust-lang.zulipchat.com/#narrow/pm-with/261224-triage-rust-lang-bot">private-messaging triagebot</a>. Any Rust organization member can edit their notifications page, or pages of other Rust organization team members. To do so, the editor must have a <code>zulip-id</code> listed in their <code>people/username.toml</code> file in the <a href="https://github.com/rust-lang/team/">team repository</a>. The bot will tell you which ID to use when talking to it for the first time; please <code>r? @Mark-Simulacrum</code> on PRs adding Zulip IDs.</p>
 <p>The following commands are supported:</p>
 <ul>
 <li><code>acknowledge &lt;url&gt;</code> (or short form <code>ack &lt;url&gt;</code>)</li>
 <li><code>acknowledge &lt;idx&gt;</code> (or short form <code>ack &lt;idx&gt;</code>)</li>
 </ul>
 <p>These both acknowledge (and remove) a notification from the list.</p>
+<ul>
+<li><code>acknowledge all</code> or <code>acknowledge *</code> (or short form <code>ack all</code> or <code>ack *</code>)</li>
+</ul>
+<p>This acknowledges and removes all notifications.</p>
 <ul>
 <li><code>add &lt;url&gt; &lt;description... (multiple words)&gt;</code></li>
 </ul>
