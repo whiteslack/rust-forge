@@ -4425,14 +4425,10 @@ with a file name like <code>YYYY-MM-DD.md</code></li>
 <h1><a class="header" href="#libs" id="libs">Libs</a></h1>
 <p>This section documents meta processes by the Libs team.</p>
 <h2><a class="header" href="#where-to-find-us" id="where-to-find-us">Where to find us</a></h2>
-<p>The libs team hangs out primarily in <a href="https://rust-lang.zulipchat.com/">the rust-lang Zulip</a> these days in the <code>#t-libs</code> stream.</p>
+<p>The <a href="https://github.com/rust-lang/libs-team"><code>rust-lang/libs-team</code></a> GitHub repository is the home of the Libs team.
+It has details on current project groups, upcoming meetings, and the status of tracking issues.</p>
+<p>The Libs team hangs out primarily in <a href="https://rust-lang.zulipchat.com/">the rust-lang Zulip</a> these days in the <code>#t-libs</code> stream.</p>
 <p>You can also find out more details about <a href="libs/../../platforms/zulip.html">Zulip and how the Rust community uses it</a>.</p>
-<h2><a class="header" href="#useful-github-queries" id="useful-github-queries">Useful GitHub queries</a></h2>
-<p>The Libs team does its work in a number of repositories throughout the <code>rust-lang</code> organization and others on GitHub.</p>
-<table><thead><tr><th>Query</th><th>Description</th></tr></thead><tbody>
-<tr><td><a href="https://github.com/rust-lang/rfcs/pulls?q=is%3Apr+is%3Aopen+label%3AT-libs">Open Libs RFCs</a></td><td>RFCs that need input from the Libs team.</td></tr>
-<tr><td><a href="https://github.com/rust-lang/rust/pulls?q=is%3Apr+is%3Aopen+label%3AT-libs">Open Libs PRs</a></td><td>PRs that need input from the Libs team.</td></tr>
-</tbody></table>
 <h1><a class="header" href="#maintaining-the-standard-library" id="maintaining-the-standard-library">Maintaining the standard library</a></h1>
 <blockquote>
 <p>Everything I wish I knew before somebody gave me <code>r+</code></p>
@@ -4568,8 +4564,67 @@ let c = a + &amp;b;
 <li><code>Pin&lt;T&gt;</code></li>
 </ul>
 <h3><a class="header" href="#is-specialization-involved" id="is-specialization-involved">Is specialization involved?</a></h3>
-<p><strong>NOTE(2019-02-10):</strong> Due to recent soundness holes introduced by specialization in the standard library (c.f. <a href="https://github.com/rust-lang/rust/pull/68358">#68358</a> and <a href="https://github.com/rust-lang/rust/issues/67194">#67194</a>) the language team decided on a design meeting to place a moratorium on new uses of specialization until we have some checks in place ensuring soundness for internal uses.</p>
+<p>Specialization is currently unstable. You can track its progress <a href="https://github.com/rust-lang/rust/issues/31844">here</a>.</p>
 <p>We try to avoid leaning on specialization too heavily, limiting its use to optimizing specific implementations. These specialized optimizations use a private trait to find the correct implementation, rather than specializing the public method itself. Any use of specialization that changes how methods are dispatched for external callers should be carefully considered.</p>
+<p>As an example of how to use specialization in the standard library, consider the case of creating an <code>Rc&lt;[T]&gt;</code> from a <code>&amp;[T]</code>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;T: Clone&gt; From&lt;&amp;[T]&gt; for Rc&lt;[T]&gt; {
+    #[inline]
+    fn from(v: &amp;[T]) -&gt; Rc&lt;[T]&gt; {
+        unsafe { Self::from_iter_exact(v.iter().cloned(), v.len()) }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>It would be nice to have an optimized implementation for the case where <code>T: Copy</code>:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;T: Copy&gt; From&lt;&amp;[T]&gt; for Rc&lt;[T]&gt; {
+    #[inline]
+    fn from(v: &amp;[T]) -&gt; Rc&lt;[T]&gt; {
+        unsafe { Self::copy_from_slice(v) }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Unfortunately we couldn't have both of these impls normally, because they'd overlap. This is where private specialization can be used to choose the right implementation internally. In this case, we use a trait called <code>RcFromSlice</code> that switches the implementation:</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;T: Clone&gt; From&lt;&amp;[T]&gt; for Rc&lt;[T]&gt; {
+    #[inline]
+    fn from(v: &amp;[T]) -&gt; Rc&lt;[T]&gt; {
+        &lt;Self as RcFromSlice&lt;T&gt;&gt;::from_slice(v)
+    }
+}
+
+/// Specialization trait used for `From&lt;&amp;[T]&gt;`.
+trait RcFromSlice&lt;T&gt; {
+    fn from_slice(slice: &amp;[T]) -&gt; Self;
+}
+
+impl&lt;T: Clone&gt; RcFromSlice&lt;T&gt; for Rc&lt;[T]&gt; {
+    #[inline]
+    default fn from_slice(v: &amp;[T]) -&gt; Self {
+        unsafe { Self::from_iter_exact(v.iter().cloned(), v.len()) }
+    }
+}
+
+impl&lt;T: Copy&gt; RcFromSlice&lt;T&gt; for Rc&lt;[T]&gt; {
+    #[inline]
+    fn from_slice(v: &amp;[T]) -&gt; Self {
+        unsafe { Self::copy_from_slice(v) }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Only specialization using the <code>min_specialization</code> feature should be used. The full <code>specialization</code> feature is known to be unsound.</p>
+<h3><a class="header" href="#are-const-generics-involved" id="are-const-generics-involved">Are const generics involved?</a></h3>
+<p>Const generics are currently unstable. You can track their progress <a href="https://github.com/rust-lang/rust/issues/44580">here</a>.</p>
+<p>Using const generics in public APIs is ok, but only const generics using the <code>min_const_generics</code> feature should be used publicly for now.</p>
 <h3><a class="header" href="#are-there-public-enums" id="are-there-public-enums">Are there public enums?</a></h3>
 <p>Public enums should have a <code>#[non_exhaustive]</code> attribute if there's any possibility of new variants being introduced, so that they can be added without causing breakage.</p>
 <h3><a class="header" href="#does-this-change-drop-order" id="does-this-change-drop-order">Does this change drop order?</a></h3>
@@ -4621,11 +4676,11 @@ impl&lt;T&gt; Drop for OptionCell&lt;T&gt; {
 <p>PRs to <a href="https://github.com/rust-lang/rust"><code>rust-lang/rust</code></a> aren’t merged manually using GitHub’s UI or by pushing remote branches. Everything goes through <a href="https://github.com/rust-lang/homu"><code>bors</code></a>.</p>
 <h3><a class="header" href="#when-to-rollup" id="when-to-rollup">When to <code>rollup</code></a></h3>
 <p>For Libs PRs, rolling up is usually fine, in particular if it's only a new unstable addition or if it only touches docs.</p>
-<p>See the <a href="libs/../compiler/reviews.html#rollups">rollup guidelines</a> for more details on when to rollup.</p>
+<p>See the <a href="libs/../compiler/reviews.html#rollups">rollup guidelines</a> for more details on when to rollup. The idea is to try collect a number of PRs together and merge them all at once, rather than individually. This can get things merged faster, but might not be appropriate for some PRs that are likely to conflict, or have performance characteristics that would be obscured in a rollup.</p>
 <h3><a class="header" href="#when-theres-new-public-items" id="when-theres-new-public-items">When there’s new public items</a></h3>
 <p>If the feature is new, then a tracking issue should be opened for it. Have a look at some previous <a href="https://github.com/rust-lang/rust/issues?q=label%3AC-tracking-issue+label%3AT-libs">tracking issues</a> to get an idea of what needs to go in there. The <code>issue</code> field on <code>#[unstable]</code> attributes should be updated with the tracking issue number.</p>
 <p>Unstable features can be merged as normal through <a href="https://github.com/rust-lang/homu"><code>bors</code></a> once they look ready.</p>
-<h3><a class="header" href="#when-theres-new-trait-impls" id="when-theres-new-trait-impls">When there’s new trait impls</a></h3>
+<h3><a class="header" href="#when-theres-new-trait-impls" id="when-theres-new-trait-impls">When there's new trait impls</a></h3>
 <p>There’s no way to make a trait impl for a stable trait unstable, so <strong>any PRs that add new impls for already stable traits must go through a FCP before merging.</strong> If the trait itself is unstable though, then the impl needs to be unstable too.</p>
 <h3><a class="header" href="#when-a-feature-is-being-stabilized" id="when-a-feature-is-being-stabilized">When a feature is being stabilized</a></h3>
 <p>Features can be stabilized in a PR that replaces <code>#[unstable]</code> attributes with <code>#[stable]</code> ones. The feature needs to have an accepted RFC before stabilizing. They also need to go through a FCP before merging.</p>
