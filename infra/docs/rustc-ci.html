@@ -214,7 +214,7 @@ merged. Breakages like these usually happen when another, incompatible PR is
 merged after the build happened.</p>
 <p>To ensure a master that works all the time we forbid manual merges: instead all
 PRs have to be approved through our bot, <a href="https://github.com/bors">bors</a> (the software behind it is
-called <a href="https://github.com/rust-lang/homu">homu</a>). All the approved PRs are put <a href="https://buildbot2.rust-lang.org/homu/queue/rust">in a queue</a> (sorted
+called <a href="https://github.com/rust-lang/homu">homu</a>). All the approved PRs are put <a href="https://bors.rust-lang.org/queue/rust">in a queue</a> (sorted
 by priority and creation date) and are automatically tested one at the time. If
 all the builders are green the PR is merged, otherwise the failure is recorded
 and the PR will have to be re-approved again.</p>
