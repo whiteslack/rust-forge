@@ -223,6 +223,22 @@ with port <code>2201</code> you can run:</p>
 <p>Note that the VM image regenerates its own host key every time it boots, so
 you'll likely get host key mismatch errors when connecting to a freshly booted
 VM.</p>
+<h3><a class="header" href="#accessing-the-out-of-band-console-for-packet-servers" id="accessing-the-out-of-band-console-for-packet-servers">Accessing the out-of-band console for Packet servers</a></h3>
+<p>In the event that a bare metal server hosted on Packet becomes unreachable but
+is still marked as online, it's possible to access the out-of-band console over
+the serial port to get a root shell.</p>
+<p>To access it, retrieve the root password configured on the server with:</p>
+<pre><code>aws ssm get-parameter --name /prod/ansible/HOSTNAME/root-password --with-decryption --query 'Parameter.Value' --output text
+</code></pre>
+<p>For example, to get the root password of <code>ci-arm-1</code>, run:</p>
+<pre><code>aws ssm get-parameter --name /prod/ansible/ci-arm-1/root-password --with-decryption --query 'Parameter.Value' --output text
+</code></pre>
+<p>Then, log into the <a href="https://app.packet.net">packet console</a>, navigate to the server
+page and click the &quot;out-of-band console&quot; button at the top right: the SSH
+command to use will be shown. Once you run the command you will be asked to
+login on the server: use <code>root</code> as the username and the password you fetched
+earlier as the password.</p>
+<p>To exit the out-of-band console, type a new line followed by <code>~.</code>.</p>
 
                     </main>
 
