@@ -3782,6 +3782,37 @@ the following machines:</p>
 <p>Please get in touch with the Infrastructure Team if you need to run builds on
 this pool for your project in the <code>rust-lang</code> organization.</p>
 <h2><a class="header" href="#maintenance-procedures-1" id="maintenance-procedures-1">Maintenance procedures</a></h2>
+<h3><a class="header" href="#updating-the-github-actions-runner-version" id="updating-the-github-actions-runner-version">Updating the GitHub Actions runner version</a></h3>
+<p>Our self-hosted CI runs on a <a href="https://github.com/rust-lang/gha-runner">custom fork of the GitHub Actions
+runner</a>, which improves the security of the setup. The
+fork needs to be manually rebased every time a new version comes out though,
+and that needs to be done relatively quickly to prevent CI from
+stopping<sup class="footnote-reference"><a href="#self-updates">1</a></sup>.</p>
+<p>Once a new release of <a href="https://github.com/actions/runner">actions/runner</a> is out, clone <a href="https://github.com/rust-lang/gha-runner">rust-lang/gha-runner</a> and
+fetch the new tag pushed to the upstream repository. Then, rebase the changes
+on top of the latest tag:</p>
+<pre><code class="language-bash">git rebase --onto ${NEW_TAG} ${OLD_TAG} ${OLD_TAG}-rust${N}
+</code></pre>
+<p>For example, if the new tag is <code>v2.275.0</code>, the old tag is <code>v2.274.2</code> and there
+were two releases of our fork, the command to execute would be:</p>
+<pre><code class="language-bash">git rebase --onto v2.275.0 v2.274.2 v2.274.2-rust2
+</code></pre>
+<p>The last commit to rebase <em>will</em> conflict, as that commit updates the version
+number and the release notes. Add the <code>-rust1</code> suffix to the new version number
+and remove the description of the changes from the changelog (keeping the
+<em>&quot;Fork of the GitHub Actions runner used by the Rust Infrastructure Team.&quot;</em>
+sentence). Once the rebase is complete force-push the commits to <code>main</code>.</p>
+<p>After you force-push the new commits to <code>main</code> you're done! CI will create a
+tag, build the release, upload it to GitHub Releases, and automatically push a
+commit to <a href="https://github.com/rust-lang/gha-self-hosted">rust-lang/gha-self-hosted</a> bumping the pinned
+runner version to download in the images. The servers will then shortly pull
+the latest changes, rebuild the images and restart idle VMs.</p>
+<div class="footnote-definition" id="self-updates"><sup class="footnote-definition-label">1</sup>
+<p>The GitHub Actions runner really wants to self-update when a
+new release is out, but such updates would prevent our security mitigations.
+Because of that, one of the patches in our fork disable self-updates, but
+that means the runner just stops working until it's updated.</p>
+</div>
 <h3><a class="header" href="#changing-the-instances-configuration" id="changing-the-instances-configuration">Changing the instances configuration</a></h3>
 <p>The set of instances available in each host is configured through the
 Ansible configuration located in the <a href="https://github.com/rust-lang/simpleinfra">simpleinfra repo</a>:</p>
